@@ -1,0 +1,56 @@
+/* #gestMenuList{
+    opacity:0;
+    pointer-events:none;
+}
+
+#loginMenuList{
+    opacity:0;
+    pointer-events:none;
+}
+
+#gestContainer{
+    opacity:0;
+    pointer-events:none;
+}
+#loginContainer{
+    opacity:0;
+    pointer-events:none;
+} */
+
+#menuBg{
+    opacity:0;
+    pointer-events:none;
+}
+
+#close{
+    opacity:0;
+    pointer-events:none;
+}
+
+#close.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+#menuBg.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+#loginContainer{
+    opacity:0;
+    pointer-events:none;
+}
+#loginContainer.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+#gestContainer{
+    opacity:0;
+    pointer-events:none;
+}
+#gestContainer.active{
+    opacity:1;
+    pointer-events:auto;
+}
