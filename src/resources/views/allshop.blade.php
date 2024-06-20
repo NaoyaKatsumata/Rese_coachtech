@@ -37,11 +37,13 @@
     <div class="py-24 mx-auto w-[90%]">
         <div class="flex flex-wrap h-[200px]">
             <!-- 店カード -->
-            <div class="flex-column break-words w-[24%] mx-[0.5%] bg-white rounded-[10px]">
-                <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{asset('img/italian.jpg')}}">
-                <div class="m-4">仙人</div>
-                
+            @foreach($shops as $shop )
+            <div class="flex-column break-words w-[24%] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
+                <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{ asset($shop->img)}}">
+                <div class="m-4">{{$shop->shop_name}}</div>
+                <div class="">{{$shop->shop_name}}</div>
             </div>
+            @endforeach
         </div>
 
     </div>
@@ -92,6 +94,7 @@
             </ul>
         </div>
     </div>
+    <!-- javascript読み込み -->
     <script src="{{ asset('js/loginmenu.js') }}"></script>
     <script src="{{ asset('js/gestmenu.js') }}"></script>
 </body>

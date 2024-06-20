@@ -64,7 +64,7 @@ class ShopsTableSeeder extends Seeder
             'shop_name'=>'香',
             'detail'=>'大小さまざまなお部屋をご用意してます。デートや接待、記念日や誕生日など特別な日にご利用ください。皆様のご来店をお待ちしております。',
             'category'=>2,
-            'img'=>'img/yakinik.jpg',
+            'img'=>'img/yakiniku.jpg',
             'area_id'=>1
         ];
         DB::table('shops')->insert($param);
