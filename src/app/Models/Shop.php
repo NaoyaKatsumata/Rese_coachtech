@@ -13,6 +13,10 @@ class Shop extends Model
     protected $fillable=['shop_name','detail','category','img','area_id'];
 
     public function area(){
-        return $this->hasMany('App\Models\categories');
+        return $this->belongsTo(Area::class);
+    }
+
+    public function categories(){
+        return $this->belongsTo(Category::class);
     }
 }

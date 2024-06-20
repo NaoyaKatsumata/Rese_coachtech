@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('shop_name');
             $table->string('detail');
-            $table->integer('category');
+            $table->integer('category_id');
             $table->string('img');
             $table->bigInteger('area_id')->references('id')->on('areas');
             $table->timestamps();

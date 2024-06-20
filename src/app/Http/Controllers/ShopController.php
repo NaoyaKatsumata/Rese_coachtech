@@ -9,7 +9,8 @@ class ShopController extends Controller
 {
     public function shopAll(){
         $shops = Shop::all();
-        dd($shops);
+        // $areas = $shops->area->id;
+        // dd($shops);
         return view('allshop',['shops'=>$shops]);
     }
 }
