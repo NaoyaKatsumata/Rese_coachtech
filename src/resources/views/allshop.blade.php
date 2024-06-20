@@ -40,10 +40,12 @@
             @foreach($shops as $shop )
             <div class="flex-column break-words w-[24%] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
                 <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{ asset($shop->img)}}">
-                <div class="m-4">{{$shop->shop_name}}</div>
-                <div>
-                <div class="">{{$shop->area->area_name}}</div>
-                <div class="">{{$shop->category->category_name}}</div>
+                <div class="mx-4">
+                    <div class="my-2">{{$shop->shop_name}}</div>
+                    <div class="flex">
+                        <div class="text-lx">#{{$shop->area->area_name}}</div>
+                        <div class="">#{{$shop->category->category_name}}</div>
+                    </div>
                 </div>
             </div>
             @endforeach
