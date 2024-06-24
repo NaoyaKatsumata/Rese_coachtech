@@ -49,7 +49,7 @@
                     <div class="flex">
                         <form class="flex mt-4 content-center justify-between" action="test" method="post">
                             @csrf
-                                <input type="hidden" name="shop_id" value="$shop->id">
+                                <input type="hidden" name="shop_id" value="{{$shop->id}}">
                                 <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" formaction="test" value="詳しくみる"/>
                         </form>
                         <form class="flex mt-4" action="/" method="post">
@@ -57,6 +57,7 @@
                             @method('PUT')
                             @auth
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="shop_id" value="{{$shop->id}}">
                                 @isset($users)
                                     @php
                                         $favoriteFlg=False;
