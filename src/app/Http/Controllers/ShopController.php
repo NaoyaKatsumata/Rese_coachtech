@@ -24,7 +24,7 @@ class ShopController extends Controller
         ->get();
         $shops = Shop::all();
         // $json = json_encode($user,JSON_PRETTY_PRINT);
-        // dd($users,$shops);
+        dd($users,$shops);
         return view('allshop',['users'=>$users,'shops'=>$shops]);//->json(['user'=>$user]);
         // return response()->json(['user'=>$user]);
     }

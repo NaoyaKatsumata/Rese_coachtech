@@ -15,13 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Shopcontroller::class,'shopAll']);
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/',[Shopcontroller::class,'favorite']);
+    Route::put('/',[Shopcontroller::class,'favorite']);
+    Route::post('/test',[Shopcontroller::class,'favorite']);
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/', [Shopcontroller::class,'shopAll']);
 
 require __DIR__.'/auth.php';

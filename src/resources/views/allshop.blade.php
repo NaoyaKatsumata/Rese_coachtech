@@ -46,14 +46,17 @@
                         <div class="text-xs">#{{$shop->area->area_name}}</div>
                         <div class="text-xs mx-[5px]">#{{$shop->category->category_name}}</div>
                     </div>
-                    <form class="flex mt-4 content-center justify-between" action="?" method="post">
-                        @csrf
-                            <input type="hidden" name="shop_id" value="$shop->id">
-                        @auth
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        @endauth
-                            <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" formaction="test" value="詳しくみる"/>
+                    <div class="flex">
+                        <form class="flex mt-4 content-center justify-between" action="test" method="post">
+                            @csrf
+                                <input type="hidden" name="shop_id" value="$shop->id">
+                                <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" formaction="test" value="詳しくみる"/>
+                        </form>
+                        <form class="flex mt-4" action="/" method="post">
+                            @csrf
+                            @method('PUT')
                             @auth
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 @isset($users)
                                     @php
                                         $favoriteFlg=False;
@@ -64,16 +67,18 @@
                                         }
                                     @endphp
                                     @if($favoriteFlg)
-                                        <input id="id{{$shop->id}}" type="image" class="w-[10%] active" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                        <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                     @else
-                                        <input id="id{{$shop->id}}" type="image" class="w-[10%]" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                        <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                     @endif
                                 @else
-                                    <input id="id{{$shop->id}}" type="image" class="w-[10%]" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                    <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                 @endisset
+                            @else
+                                <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                             @endauth
-                    </form>
-                    <!-- {{$shop->id}} -->
+                        </form>
+                    </div>
                 </div>
             </div>
             @endforeach
