@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Shop;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -23,13 +25,22 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user_email = User::where('email','=',$request->email)->first()->email;
+        $users = User::select('users.id','favorites.shop_id')
+        ->where('users.email','=',$user_email)
+        ->join('favorites','users.id','=','favorites.user_id')
+        ->get();
+        $shops = Shop::all();
+        // dd($user_email,$users,$shops);
+        return view('allshop',['users'=>$users,'shops'=>$shops]);
+
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
