@@ -10,28 +10,45 @@
 <body id="body" class="bg-zinc-100 overflow-hidden">
 
     <!-- アイコン&タイトル -->
-    <header class="fixed w-full bg-zinc-100 ">
-        <div class="flex">
-            <div class="pl-16 py-6">
-                @auth
-                    <div id="loginMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
-                        <div class="w-[70%] mx-auto">
-                            <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
-                            <div class="absolute top-[20px] w-[70%] h-[1px] bg-white"></div>
-                            <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
+    <header class="fixed w-full mx-auto bg-zinc-100 ">
+        <div class="flex w-[90%] mx-auto my-6 justify-between">
+            <div class="flex">
+                <div class="">
+                    @auth
+                        <div id="loginMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
+                            <div class="w-[70%] mx-auto">
+                                <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
+                                <div class="absolute top-[20px] w-[70%] h-[1px] bg-white"></div>
+                                <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
+                            </div>
                         </div>
-                    </div>
-                @else
-                    <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
-                        <div class="w-[70%] mx-auto">
-                            <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
-                            <div class="absolute top-[20px] w-[70%] h-[1px] bg-white"></div>
-                            <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
+                    @else
+                        <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
+                            <div class="w-[70%] mx-auto">
+                                <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
+                                <div class="absolute top-[20px] w-[70%] h-[1px] bg-white"></div>
+                                <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
+                            </div>
                         </div>
-                    </div>
-                @endauth
+                    @endauth
+                </div>
+                <div class="px-16 text-4xl text-blue-600 font-bold">Rese</div>
             </div>
-            <div class="px-16 py-6 text-4xl text-blue-600 font-bold">Rese</div>
+            <div class="">
+                <form action="/" method="post">
+                    @csrf
+                    @auth
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    @endauth
+                    @method('PUT')
+                    <select class="border-none focus:ring-0" name="area" onchange="this.form.submit()">
+                    @foreach($areas as $area)
+                        <option value="{{$area->area_name}}" @if($selectedArea == $area->area_name) selected @endif>{{$area->area_name}}</option>
+                    @endforeach
+                    <option value="All shop" @if($selectedArea == 'All shop') selected @endif>All shop</option>
+                    </select>
+                </form>
+            </div>
         </div>
     </header>
     <div class="py-24 mx-auto w-[90%] overflow-auto h-svh">
