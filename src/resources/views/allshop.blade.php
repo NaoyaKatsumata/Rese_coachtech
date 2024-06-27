@@ -40,12 +40,12 @@
                     @auth
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     @endauth
-                    @method('PUT')
+                    @method('PATCH')
                     <select class="border-none focus:ring-0" name="area" onchange="this.form.submit()">
+                    <option value="All shop" @if($selectedArea == 'All shop') selected @endif>All shop</option>
                     @foreach($areas as $area)
                         <option value="{{$area->area_name}}" @if($selectedArea == $area->area_name) selected @endif>{{$area->area_name}}</option>
                     @endforeach
-                    <option value="All shop" @if($selectedArea == 'All shop') selected @endif>All shop</option>
                     </select>
                 </form>
             </div>
@@ -78,8 +78,8 @@
                                 @isset($users)
                                     @php
                                         $favoriteFlg=False;
-                                        foreach($users as $user){
-                                            if($user->shop_id == $shop->id){
+                                        foreach($userFavorites as $userFavorite){
+                                            if($userFavorite->shop_id == $shop->id){
                                                 $favoriteFlg=True;
                                             }
                                         }

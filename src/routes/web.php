@@ -26,5 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/', [Shopcontroller::class,'shopAll']);
+Route::patch('/',[Shopcontroller::class,'search']);
 
 require __DIR__.'/auth.php';
