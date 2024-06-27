@@ -27,5 +27,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/', [Shopcontroller::class,'shopAll']);
 Route::patch('/',[Shopcontroller::class,'search']);
+Route::get('/detail', [Shopcontroller::class,'detail']);
+
 
 require __DIR__.'/auth.php';

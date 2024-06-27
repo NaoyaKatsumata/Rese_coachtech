@@ -67,7 +67,7 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     @endauth
                     @method('PATCH')
-                    <input type="search" class="border-none focus:ring-0" name="shopName" placeholder="Search...">
+                    <input type="search" class="border-none focus:ring-0" name="shopName" size="40" placeholder="Search...">
                 </form>
             </div>
         </div>
@@ -85,10 +85,9 @@
                         <div class="text-xs mx-[5px]">#{{$shop->category->category_name}}</div>
                     </div>
                     <div class="flex">
-                        <form class="flex mt-4 content-center justify-between" action="test" method="post">
-                            @csrf
-                                <input type="hidden" name="shop_id" value="{{$shop->id}}">
-                                <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" formaction="test" value="詳しくみる"/>
+                        <form class="flex mt-4 content-center justify-between" action="/detail" method="get">
+                                <input type="hidden" name="id" value="{{$shop->id}}">
+                                <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" value="詳しくみる"/>
                         </form>
                         <form class="flex mt-4" action="/" method="post">
                             @csrf
@@ -126,7 +125,7 @@
     </div>
 
     <!-- 未ログイン時メニュー -->
-    <div class="absolute w-[90%] mx-auto top-[24px] left-[64px]">
+    <div class="absolute w-[90%] mx-auto my-6 top-[0px] left-[5%]">
         <div id="menuBg" class="w-full h-full fixed top-[0px] left-[0px] bottom-[0px] bg-white"></div>
         <div id="close" class="w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
             <div class="w-[70%] mx-auto">
@@ -147,7 +146,7 @@
 
 
     <!-- ログイン時メニュー -->
-    <div class="absolute w-[90%] mx-auto top-[24px] left-[64px]">
+    <div class="absolute w-[90%] mx-auto my-6 top-[0px] left-[5%]">
         <div id="menuBg" class="w-full h-full fixed top-[0px] left-[0px] bottom-[0px] bg-white"></div>
         <div id="close" class="w-[40px] h-[40px] pl-16 py-6 bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
             <div class="w-[70%] mx-auto fixed">

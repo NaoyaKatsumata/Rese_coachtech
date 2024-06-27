@@ -24,6 +24,7 @@ class ShopController extends Controller
         $userId = $request->user_id;
         $shopId = $request->shop_id;
         $selectedArea = $request->area;
+        $selectedCategory = $request->category;
         // dd($userId,$shopId);
         if($request->area === 'All shop'){
             $areaId = Area::all();
@@ -68,7 +69,7 @@ class ShopController extends Controller
         $categories = Category::all();
         //テスト用
         // dd($userFavorites);
-        return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea]);
+        return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory]);
     }
 
     public function search(Request $request){
@@ -102,5 +103,9 @@ class ShopController extends Controller
         ->get();
         // dd($userId,$selectedArea,$selectedCategory,$selectedShop,$shops);
         return view('allshop',['shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'userFavorites'=>$userFavorites,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'selectedShop'=>$selectedShop]);
+    }
+
+    public function detail(Request $request){
+        dd($request);
     }
 }
