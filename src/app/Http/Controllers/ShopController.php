@@ -79,7 +79,8 @@ class ShopController extends Controller
         $selectedCategory = $request->category;
         $selectedCategoryId = Category::where("category_name","=",$selectedCategory)
         ->first();
-        $selectedShop = $request->shop;
+        $selectedShop = $request->shopName;
+        // dd($selectedShop);
         if(isset($selectedAreaId)){
             $shops = Shop::where("area_id","=",$selectedAreaId->id)
             ->get();
@@ -92,7 +93,7 @@ class ShopController extends Controller
             $shops = Shop::where("shop_name","like","%".$selectedShop."%")
             ->get();
         }
-        if($selectedArea==='All area' or $selectedCategory==='All genre'){
+        if(!isset($shops)){
             $shops = Shop::all();
         }
         $areas = Area::all();

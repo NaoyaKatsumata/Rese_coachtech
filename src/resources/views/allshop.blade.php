@@ -61,6 +61,14 @@
                     @endforeach
                     </select>
                 </form>
+                <form action='/' method="post">
+                    @csrf
+                    @auth
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    @endauth
+                    @method('PATCH')
+                    <input type="search" class="border-none focus:ring-0" name="shopName" placeholder="Search...">
+                </form>
             </div>
         </div>
     </header>
