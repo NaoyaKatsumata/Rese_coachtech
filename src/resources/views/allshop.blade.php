@@ -34,7 +34,7 @@
                 </div>
                 <div class="px-16 text-4xl text-blue-600 font-bold">Rese</div>
             </div>
-            <div class="">
+            <div class="flex">
                 <form action="/" method="post">
                     @csrf
                     @auth
@@ -42,9 +42,22 @@
                     @endauth
                     @method('PATCH')
                     <select class="border-none focus:ring-0" name="area" onchange="this.form.submit()">
-                    <option value="All shop" @if($selectedArea == 'All shop') selected @endif>All shop</option>
+                    <option value="All area" @if($selectedArea == 'All area') selected @endif>All area</option>
                     @foreach($areas as $area)
                         <option value="{{$area->area_name}}" @if($selectedArea == $area->area_name) selected @endif>{{$area->area_name}}</option>
+                    @endforeach
+                    </select>
+                </form>
+                <form action="/" method="post">
+                    @csrf
+                    @auth
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    @endauth
+                    @method('PATCH')
+                    <select class="border-none focus:ring-0" name="category" onchange="this.form.submit()">
+                    <option value="All genre" @if($selectedCategory == 'All genre') selected @endif>All genre</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->category_name}}" @if($selectedCategory == $category->category_name) selected @endif>{{$category->category_name}}</option>
                     @endforeach
                     </select>
                 </form>
@@ -75,7 +88,7 @@
                             @auth
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 <input type="hidden" name="shop_id" value="{{$shop->id}}">
-                                @isset($users)
+                                @isset($userFavorites)
                                     @php
                                         $favoriteFlg=False;
                                         foreach($userFavorites as $userFavorite){
@@ -85,15 +98,15 @@
                                         }
                                     @endphp
                                     @if($favoriteFlg)
-                                        <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                        <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                     @else
-                                        <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                        <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                     @endif
                                 @else
-                                    <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                    <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                 @endisset
                             @else
-                                <input id="id{{$shop->id}}" type="image" class="w-[10%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                             @endauth
                         </form>
                     </div>

@@ -14,16 +14,17 @@ class ShopController extends Controller
     public function shopAll(){
         $shops = Shop::all();
         $areas = Area::all();
-        // $areas = $shops->area->id;
+        $categories = Category::all();
         // dd($shops);
-        return view('allshop',['shops'=>$shops,'areas'=>$areas,'selectedArea'=>'']);
+        // dd($areas);
+        return view('allshop',['shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
     }
 
     public function favorite(Request $request){
         $userId = $request->user_id;
         $shopId = $request->shop_id;
         $selectedArea = $request->area;
-        dd($userId,$shopId);
+        // dd($userId,$shopId);
         if($request->area === 'All shop'){
             $areaId = Area::all();
         }else{
@@ -66,7 +67,7 @@ class ShopController extends Controller
         //全カテゴリー取得
         $categories = Category::all();
         //テスト用
-        // dd($selectedArea);
+        // dd($userFavorites);
         return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea]);
     }
 
@@ -79,7 +80,6 @@ class ShopController extends Controller
         $selectedCategoryId = Category::where("category_name","=",$selectedCategory)
         ->first();
         $selectedShop = $request->shop;
-        // dd($userId,$selectedArea,$selectedAreaId->id);
         if(isset($selectedAreaId)){
             $shops = Shop::where("area_id","=",$selectedAreaId->id)
             ->get();
@@ -92,7 +92,7 @@ class ShopController extends Controller
             $shops = Shop::where("shop_name","like","%".$selectedShop."%")
             ->get();
         }
-        if($selectedArea==='All shop'){
+        if($selectedArea==='All area' or $selectedCategory==='All genre'){
             $shops = Shop::all();
         }
         $areas = Area::all();

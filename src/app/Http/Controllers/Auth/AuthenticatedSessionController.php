@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\Shop;
 use App\Models\User;
+use App\Models\Area;
+use App\Models\Category;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -32,13 +34,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user_email = User::where('email','=',$request->email)->first()->email;
-        $users = User::select('users.id','favorites.shop_id')
+        $userFavorites = User::select('users.id','favorites.shop_id')
         ->where('users.email','=',$user_email)
         ->join('favorites','users.id','=','favorites.user_id')
         ->get();
         $shops = Shop::all();
-        // dd($user_email,$users,$shops);
-        return view('allshop',['users'=>$users,'shops'=>$shops]);
+        $areas = Area::all();
+        $categories = Category::all();
+        // dd($userFavorites);
+        return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
 
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
