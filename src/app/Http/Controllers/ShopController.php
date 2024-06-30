@@ -106,6 +106,19 @@ class ShopController extends Controller
     }
 
     public function detail(Request $request){
-        dd($request);
+        $shopId = $request->id;
+        $shop = Shop::where("id","=",$shopId)
+        ->first();
+        $area = Shop::select('areas.area_name')
+        ->join("areas","shops.area_id","=","areas.id")
+        ->where("shops.id","=",$shopId)
+        ->first();
+
+        $category = Shop::select('categories.category_name')
+        ->join("categories","shops.category_id","=","categories.id")
+        ->where("shops.id","=",$shopId)
+        ->first();
+        // dd($shop,$area,$category);
+        return view('detail',['shop'=>$shop,'area'=>$area,'category'=>$category]);
     }
 }
