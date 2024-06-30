@@ -57,13 +57,12 @@
         </div>
         <!-- 予約情報入力エリア -->
         <div class="absolute top-[24px] left-[50%] w-1/2 h-[90%]">
-            <div class="flex flex-col justify-between w-[80%] h-full mx-auto bg-blue-600 rounded-[5px]">
-                <div>
-                    <p class="mx-[5%] pt-8 text-white text-xl font-bold">予約</p>
-                    <form class="flex flex-col w-[90%] mx-auto" action="/done" method="post">
-                        @csrf
-                            <input type="date" class="w-[40%] my-2 rounded-[5px]" name="" id="date" value="{{date('Y-m-d')}}">
-                            <select class="my-2 rounded-[5px]" id="time">
+            <div class="flex flex-col  w-[80%] h-full mx-auto bg-blue-600 rounded-[5px]">
+                <p class="mx-[5%] pt-8 text-white text-xl font-bold">予約</p>
+                    <form class="flex flex-col w-full mx-auto h-full" action="/done" method="post">
+                    @csrf
+                            <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px]" name="testdate" id="date" value="{{date('Y-m-d')}}">
+                            <select class="mx-[5%] my-2 rounded-[5px]" name="testtime" id="time">
                                 <option>11:00</option>
                                 <option>12:00</option>
                                 <option>13:00</option>
@@ -77,7 +76,7 @@
                                 <option>21:00</option>
                                 <option>22:00</option>
                             </select>
-                            <select class="my-2 rounded-[5px]" id="number">
+                            <select class="mx-[5%] my-2 rounded-[5px]" name="testnumber" id="number">
                                 <option>1人</option>
                                 <option>2人</option>
                                 <option>3人</option>
@@ -89,31 +88,30 @@
                                 <option>9人</option>
                                 <option>10人</option>
                             </select>
+                        <div class="mx-[5%] mx-auto my-2 bg-blue-500 rounded-[5px]">
+                            <table class="w-[90%] mx-auto mb-8">
+                                <tr>
+                                    <td class="w-[30%] py-2 text-left text-white">Shop</td>
+                                    <td class="w-[70%] py-2 text-left text-white" id="shopName">{{$shop->shop_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="w-[30%] py-2 text-left text-white">Date</td>
+                                    <td class="w-[70%] py-2 text-left text-white" id="selectedDate">{{date('Y-m-d')}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="w-[30%] py-2 text-left text-white">Time</td>
+                                    <td class="w-[70%] py-2 text-left text-white" id="selectedTime">11:00</td>
+                                </tr>
+                                <tr>
+                                    <td class="w-[30%] py-2 text-left text-white">Number</td>
+                                    <td class="w-[70%] py-2 text-left text-white" id="selectedNumber">1人</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="w-full mb-0 mt-auto">
+                            <input type="submit" class="w-full py-4 text-center text-white bg-blue-700" name="" value="予約する">
+                        </div>
                     </form>
-                    <div class="w-[90%] mx-auto my-2 bg-blue-500 rounded-[5px]">
-                        <table class="w-[90%] mx-auto mb-8">
-                            <tr>
-                                <td class="w-[30%] py-2 text-left text-white">Shop</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="shopName">{{$shop->shop_name}}</td>
-                            </tr>
-                            <tr>
-                                <td class="w-[30%] py-2 text-left text-white">Date</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedDate"></td>
-                            </tr>
-                            <tr>
-                                <td class="w-[30%] py-2 text-left text-white">Time</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedTime"></td>
-                            </tr>
-                            <tr>
-                                <td class="w-[30%] py-2 text-left text-white">Number</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedNumber"></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="">
-                    <input type="submit" class="w-full py-4 text-center text-white bg-blue-500" name="" value="予約する">
-                </div>
             </div>
         </div>
     </main>
@@ -168,5 +166,7 @@
 
     <!-- javascript読み込み -->
     <script src="{{ asset('js/reservation.js') }}"></script>
+    <script src="{{ asset('js/loginmenu.js') }}"></script>
+    <script src="{{ asset('js/gestmenu.js') }}"></script>
 </body>
 </html>

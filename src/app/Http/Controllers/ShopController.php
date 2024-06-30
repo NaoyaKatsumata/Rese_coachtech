@@ -121,4 +121,8 @@ class ShopController extends Controller
         // dd($shop,$area,$category);
         return view('detail',['shop'=>$shop,'area'=>$area,'category'=>$category]);
     }
+
+    public function done(Request $request){
+        dd($request);
+    }
 }
