@@ -22,6 +22,6 @@ class ReservationControlloer extends Controller
             'reservation_date'=>$date.' '.$time,
         ]);
         // dd($request);
-        return view();
+        return view('done',['userId'=>$userId]);
     }
 }

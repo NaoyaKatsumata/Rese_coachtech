@@ -20,9 +20,8 @@ class ShopController extends Controller
     }
 
     public function favorite(Request $request){
-        $loginUser = Auth::user();
-        $userId = $request->user_id;
-        $shopId = $request->shop_id;
+        $userId = $request->userId;
+        $shopId = $request->shopId;
         $selectedArea = $request->area;
         $selectedCategory = $request->category;
         // dd($userId,$shopId);

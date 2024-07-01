@@ -38,7 +38,7 @@
                 <form action="/" method="post">
                     @csrf
                     @auth
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endauth
                     @method('PATCH')
                     <select class="border-none focus:ring-0" name="area" onchange="this.form.submit()">
@@ -51,7 +51,7 @@
                 <form action="/" method="post">
                     @csrf
                     @auth
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endauth
                     @method('PATCH')
                     <select class="border-none focus:ring-0" name="category" onchange="this.form.submit()">
@@ -64,7 +64,7 @@
                 <form action='/' method="post">
                     @csrf
                     @auth
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endauth
                     @method('PATCH')
                     <input type="search" class="border-none focus:ring-0" name="shopName" size="40" placeholder="Search...">
@@ -93,7 +93,7 @@
                             @csrf
                             @method('PUT')
                             @auth
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                 <input type="hidden" name="shopId" value="{{$shop->id}}">
                                 @isset($userFavorites)
                                     @php
