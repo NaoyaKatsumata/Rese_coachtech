@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/allshop.css') }}">
 </head>
 <body id="body" class="bg-zinc-100 overflow-hidden w-[90%] mx-auto">
-
     <!-- アイコン&タイトル -->
     <header class="fixed w-[90%] mx-auto bg-zinc-100 ">
         <div class="flex mx-auto my-6 justify-between">
@@ -22,6 +21,9 @@
                                 <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
                             </div>
                         </div>
+                        @php
+                            $userId=Auth::user()->id;
+                        @endphp
                     @else
                         <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
                             <div class="w-[70%] mx-auto">
@@ -30,6 +32,9 @@
                                 <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
                             </div>
                         </div>
+                        @php
+                            $userId='';
+                        @endphp
                     @endauth
                 </div>
                 <div class="px-16 text-4xl text-blue-600 font-bold">Rese</div>
@@ -61,57 +66,59 @@
                 <p class="mx-[5%] pt-8 text-white text-xl font-bold">予約</p>
                     <form class="flex flex-col w-full mx-auto h-full" action="/done" method="post">
                     @csrf
-                            <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px]" name="testdate" id="date" value="{{date('Y-m-d')}}">
-                            <select class="mx-[5%] my-2 rounded-[5px]" name="testtime" id="time">
-                                <option>11:00</option>
-                                <option>12:00</option>
-                                <option>13:00</option>
-                                <option>14:00</option>
-                                <option>15:00</option>
-                                <option>16:00</option>
-                                <option>17:00</option>
-                                <option>18:00</option>
-                                <option>19:00</option>
-                                <option>20:00</option>
-                                <option>21:00</option>
-                                <option>22:00</option>
-                            </select>
-                            <select class="mx-[5%] my-2 rounded-[5px]" name="testnumber" id="number">
-                                <option>1人</option>
-                                <option>2人</option>
-                                <option>3人</option>
-                                <option>4人</option>
-                                <option>5人</option>
-                                <option>6人</option>
-                                <option>7人</option>
-                                <option>8人</option>
-                                <option>9人</option>
-                                <option>10人</option>
-                            </select>
-                        <div class="mx-[5%] mx-auto my-2 bg-blue-500 rounded-[5px]">
-                            <table class="w-[90%] mx-auto mb-8">
-                                <tr>
-                                    <td class="w-[30%] py-2 text-left text-white">Shop</td>
-                                    <td class="w-[70%] py-2 text-left text-white" id="shopName">{{$shop->shop_name}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-[30%] py-2 text-left text-white">Date</td>
-                                    <td class="w-[70%] py-2 text-left text-white" id="selectedDate">{{date('Y-m-d')}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-[30%] py-2 text-left text-white">Time</td>
-                                    <td class="w-[70%] py-2 text-left text-white" id="selectedTime">11:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-[30%] py-2 text-left text-white">Number</td>
-                                    <td class="w-[70%] py-2 text-left text-white" id="selectedNumber">1人</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="w-full mb-0 mt-auto">
-                            <input type="submit" class="w-full py-4 text-center text-white bg-blue-700" name="" value="予約する">
-                        </div>
-                    </form>
+                        <input type="hidden" name="shopId" value="{{$shop->id}}">
+                        <input type="hidden" name="userId" value="{{$userId}}">
+                        <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px]" name="date" id="date" value="{{date('Y-m-d')}}">
+                        <select class="mx-[5%] my-2 rounded-[5px]" name="time" id="time">
+                            <option>11:00</option>
+                            <option>12:00</option>
+                            <option>13:00</option>
+                            <option>14:00</option>
+                            <option>15:00</option>
+                            <option>16:00</option>
+                            <option>17:00</option>
+                            <option>18:00</option>
+                            <option>19:00</option>
+                            <option>20:00</option>
+                            <option>21:00</option>
+                            <option>22:00</option>
+                        </select>
+                        <select class="mx-[5%] my-2 rounded-[5px]" name="num" id="number">
+                            <option>1人</option>
+                            <option>2人</option>
+                            <option>3人</option>
+                            <option>4人</option>
+                            <option>5人</option>
+                            <option>6人</option>
+                            <option>7人</option>
+                            <option>8人</option>
+                            <option>9人</option>
+                            <option>10人</option>
+                        </select>
+                    <div class="mx-[5%] mx-auto my-2 bg-blue-500 rounded-[5px]">
+                        <table class="w-[90%] mx-auto mb-8">
+                            <tr>
+                                <td class="w-[30%] py-2 text-left text-white">Shop</td>
+                                <td class="w-[70%] py-2 text-left text-white" id="shopName">{{$shop->shop_name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="w-[30%] py-2 text-left text-white">Date</td>
+                                <td class="w-[70%] py-2 text-left text-white" id="selectedDate">{{date('Y-m-d')}}</td>
+                            </tr>
+                            <tr>
+                                <td class="w-[30%] py-2 text-left text-white">Time</td>
+                                <td class="w-[70%] py-2 text-left text-white" id="selectedTime">11:00</td>
+                            </tr>
+                            <tr>
+                                <td class="w-[30%] py-2 text-left text-white">Number</td>
+                                <td class="w-[70%] py-2 text-left text-white" id="selectedNumber">1人</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="w-full mb-0 mt-auto">
+                        <input type="submit" class="w-full py-4 text-center text-white bg-blue-700" name="" value="予約する">
+                    </div>
+                </form>
             </div>
         </div>
     </main>

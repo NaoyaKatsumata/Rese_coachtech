@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Favorite;
 use App\Models\Area;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -15,12 +16,11 @@ class ShopController extends Controller
         $shops = Shop::all();
         $areas = Area::all();
         $categories = Category::all();
-        // dd($shops);
-        // dd($areas);
         return view('allshop',['shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
     }
 
     public function favorite(Request $request){
+        $loginUser = Auth::user();
         $userId = $request->user_id;
         $shopId = $request->shop_id;
         $selectedArea = $request->area;
@@ -32,7 +32,6 @@ class ShopController extends Controller
             $areaId = Area::where("area_name","=",$request->area)
             ->first();
         }
-        
         $categoryName = $request->category_name;
         //リクエストされた店舗がお気に入り可動か取得
         $userFavorite = Favorite::where('user_id','=',$userId)
@@ -67,8 +66,6 @@ class ShopController extends Controller
         $areas = Area::all();
         //全カテゴリー取得
         $categories = Category::all();
-        //テスト用
-        // dd($userFavorites);
         return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory]);
     }
 
@@ -106,7 +103,7 @@ class ShopController extends Controller
     }
 
     public function detail(Request $request){
-        $shopId = $request->id;
+        $shopId = $request->shopId;
         $shop = Shop::where("id","=",$shopId)
         ->first();
         $area = Shop::select('areas.area_name')
@@ -118,11 +115,7 @@ class ShopController extends Controller
         ->join("categories","shops.category_id","=","categories.id")
         ->where("shops.id","=",$shopId)
         ->first();
-        // dd($shop,$area,$category);
+        // dd($request,$shop,$area,$category);
         return view('detail',['shop'=>$shop,'area'=>$area,'category'=>$category]);
-    }
-
-    public function done(Request $request){
-        dd($request);
     }
 }

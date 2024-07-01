@@ -86,15 +86,15 @@
                     </div>
                     <div class="flex">
                         <form class="flex mt-4 content-center justify-between" action="/detail" method="get">
-                                <input type="hidden" name="id" value="{{$shop->id}}">
-                                <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" value="詳しくみる"/>
+                            <input type="hidden" name="shopId" value="{{$shop->id}}">
+                            <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" value="詳しくみる"/>
                         </form>
                         <form class="flex mt-4" action="/" method="post">
                             @csrf
                             @method('PUT')
                             @auth
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="shop_id" value="{{$shop->id}}">
+                                <input type="hidden" name="shopId" value="{{$shop->id}}">
                                 @isset($userFavorites)
                                     @php
                                         $favoriteFlg=False;
@@ -167,7 +167,13 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><a href="">Mypage</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/mypage">
+                                @csrf
+                                @auth
+                                <input type="hidden" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="test">
+                            </form></li>
             </ul>
         </div>
     </div>
