@@ -69,7 +69,7 @@ class ShopController extends Controller
     }
 
     public function search(Request $request){
-        $userId = $request->user_id;
+        $userId = $request->userId;
         $selectedArea = $request->area;
         $selectedAreaId = Area::where("area_name","=",$selectedArea)
         ->first();
