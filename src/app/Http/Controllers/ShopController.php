@@ -20,6 +20,7 @@ class ShopController extends Controller
     }
 
     public function favorite(Request $request){
+        // dd($request);
         $userId = $request->userId;
         $shopId = $request->shopId;
         $selectedArea = $request->area;

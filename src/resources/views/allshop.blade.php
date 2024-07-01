@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/allshop.css') }}">
 </head>
 <body id="body" class="bg-zinc-100 overflow-hidden w-[90%] mx-auto">
-
     <!-- アイコン&タイトル -->
     <header class="fixed w-[90%] mx-auto bg-zinc-100 ">
         <div class="flex mx-auto my-6 justify-between">
@@ -22,6 +21,9 @@
                                 <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
                             </div>
                         </div>
+                        @php
+                            $userId = Auth::user()->id;
+                        @endphp
                     @else
                         <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
                             <div class="w-[70%] mx-auto">
@@ -30,6 +32,9 @@
                                 <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
                             </div>
                         </div>
+                        @php
+                            $userId = '';
+                        @endphp
                     @endauth
                 </div>
                 <div class="px-16 text-4xl text-blue-600 font-bold">Rese</div>
@@ -157,7 +162,15 @@
         </div>
         <div id="loginContainer" class="absolute w-full my-32 text-center">
             <ul>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="userId" value="{{$userId}}">
+                                <input type="hidden" name="shopId" value="">
+                                <input type="hidden" name="area" value="All shop">
+                                <input type="hidden" name="category" value="">
+                                <input type="submit" value="Home">
+                            </form></li>
                 <li class="mb-2"><form class="text-2xl text-blue-500" method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -172,7 +185,7 @@
                                 @auth
                                 <input type="hidden" value="{{Auth::user()->id}}">
                                 @endauth
-                                <input type="submit" value="test">
+                                <input type="submit" value="My page">
                             </form></li>
             </ul>
         </div>
