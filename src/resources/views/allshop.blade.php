@@ -78,10 +78,10 @@
         </div>
     </header>
     <main class="py-24 mx-auto overflow-auto h-svh">
-        <div class="flex flex-wrap ">
+        <div class="flex flex-wrap">
             <!-- 店カード -->
             @foreach($shops as $shop )
-            <div class="flex-column break-words w-[24%] h-[250px] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
+            <div class="flex-column break-words w-[24%] h-[300px] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
                 <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{ asset($shop->img)}}">
                 <div class="mx-4">
                     <div class="mt-4">{{$shop->shop_name}}</div>
@@ -89,12 +89,12 @@
                         <div class="text-xs">#{{$shop->area->area_name}}</div>
                         <div class="text-xs mx-[5px]">#{{$shop->category->category_name}}</div>
                     </div>
-                    <div class="flex">
-                        <form class="flex mt-4 content-center justify-between" action="/detail" method="get">
+                    <div class="flex w-full mx-auto h-[50px] my-4">
+                        <form class="flex content-center " action="/detail" method="get">
                             <input type="hidden" name="shopId" value="{{$shop->id}}">
-                            <input type="submit" class="px-4 bg-blue-500 text-white rounded-[5px]" value="詳しくみる"/>
+                            <input type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-[5px]" value="詳しくみる"/>
                         </form>
-                        <form class="flex mt-4" action="/" method="post">
+                        <form class="flex w-full" action="/" method="post">
                             @csrf
                             @method('PUT')
                             @auth
@@ -183,7 +183,7 @@
                 <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/mypage">
                                 @csrf
                                 @auth
-                                <input type="hidden" value="{{Auth::user()->id}}">
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
                                 @endauth
                                 <input type="submit" value="My page">
                             </form></li>

@@ -95,8 +95,8 @@
                             <option>9人</option>
                             <option>10人</option>
                         </select>
-                    <div class="mx-[5%] mx-auto my-2 bg-blue-500 rounded-[5px]">
-                        <table class="w-[90%] mx-auto mb-8">
+                    <div class="flex content-center w-[90%] mx-[5%] mx-auto my-2 bg-blue-500 rounded-[5px]">
+                        <table class="w-[90%] mx-auto">
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Shop</td>
                                 <td class="w-[70%] py-2 text-left text-white" id="shopName">{{$shop->shop_name}}</td>

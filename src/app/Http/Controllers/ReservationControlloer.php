@@ -19,7 +19,8 @@ class ReservationControlloer extends Controller
             'user_id'=>$userId,
             'shop_id'=>$shopId,
             'reservation_number'=>$num,
-            'reservation_date'=>$date.' '.$time,
+            'reservation_date'=>$date,
+            'reservation_time'=>$time,
         ]);
         // dd($request);
         return view('done',['userId'=>$userId]);

@@ -38,7 +38,7 @@ class ShopController extends Controller
         ->where('shop_id','=',$shopId)
         ->first();
         //お気に入り登録か削除か判定&SQL実行
-        if(!(isset($areaId))){
+        if(!(is_null($shopId))){
             if(is_null($userFavorite)){
             //お気に入り登録処理
                 Favorite::create([

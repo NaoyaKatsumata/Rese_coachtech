@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="min-h-screen flex flex-col pt-32 items-center pt-6 pt-0 bg-gray-100">
+    <div class="min-h-screen flex flex-col pt-[200px] items-center pt-0 bg-gray-100">
         <!-- login -->
         <p class="w-[30%] sm:max-w-md shadow-md px-4 py-4 overflow-hidden bg-blue-500 rounded-t-lg text-white">Registration</p>
         <!-- 入力フォーム -->

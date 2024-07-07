@@ -18,7 +18,8 @@ return new class extends Migration
             $table->bigInteger('user_id')->references('id')->on('users');
             $table->bigInteger('shop_id')->references('id')->on('shops');
             $table->integer('reservation_number');
-            $table->timestamp('reservation_date');
+            $table->date('reservation_date');
+            $table->time('reservation_time');
             $table->timestamps();
         });
     }

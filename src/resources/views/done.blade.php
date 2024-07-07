@@ -41,7 +41,7 @@
         </div>
     </main>
 
-    <!-- 未ログイン時メニュー -->
+    <!-- ログイン時メニュー -->
     <div class="absolute w-[90%] mx-auto my-6 top-[0px]">
         <div id="menuBg" class="w-full h-full fixed top-[0px] left-[0px] bottom-[0px] bg-white"></div>
         <div id="close" class="w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">

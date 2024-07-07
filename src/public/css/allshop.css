@@ -62,3 +62,10 @@
     background-color: rgb(244 244 245)
 }
 
+.clock-color{
+    font-family: "Font Awesome 5 Free"; /*←ココ！！！！！！！*/
+    font-weight: 900;
+    color:white;
+    content: "\f007";
+}
+
