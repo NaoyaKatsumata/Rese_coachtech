@@ -41,6 +41,7 @@ class AuthenticatedSessionController extends Controller
         $shops = Shop::all();
         $areas = Area::all();
         $categories = Category::all();
+        $request->session()->regenerateToken();
         // dd($userFavorites);
         return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
 

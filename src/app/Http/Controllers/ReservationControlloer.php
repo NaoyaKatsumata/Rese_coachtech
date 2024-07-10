@@ -23,6 +23,7 @@ class ReservationControlloer extends Controller
             'reservation_time'=>$time,
         ]);
         // dd($request);
+        $request->session()->regenerateToken();
         return view('done',['userId'=>$userId]);
     }
 }

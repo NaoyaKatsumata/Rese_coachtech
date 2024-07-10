@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     public function shopAll(){
+        Auth::guard('web')->logout();
         $shops = Shop::all();
         $areas = Area::all();
         $categories = Category::all();
@@ -20,11 +21,11 @@ class ShopController extends Controller
     }
 
     public function favorite(Request $request){
-        // dd($request);
         $userId = $request->userId;
         $shopId = $request->shopId;
         $selectedArea = $request->area;
         $selectedCategory = $request->category;
+        $request->session()->regenerateToken();
         // dd($userId,$shopId);
         if($request->area === 'All shop'){
             $areaId = Area::all();

@@ -6,6 +6,7 @@
     <title>Document</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/allshop.css') }}">
+    <script src="{{ asset('js/pagereload.js') }}"></script>
 </head>
 <body id="body" class="bg-zinc-100 overflow-hidden w-[90%] mx-auto">
     <!-- アイコン&タイトル -->

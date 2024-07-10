@@ -34,6 +34,8 @@
                 <p class="my-4 font-bold text-xl">予約状況</p>
                 @php
                 $count = 1;
+                $nowDate = new DateTime();
+                $nowDate->format('Y-m-d');
                 @endphp
                 @foreach($reservations as $reservation)
                 <div class="w-[90%] mr-[10%] bg-blue-500 rounded-[10px]">
@@ -69,6 +71,11 @@
                                 <td class="w-[80%]">{{$reservation->reservation_number}}人</td>
                             </tr>
                         </table>
+                        @php
+                        $reservationDate = new DateTime($reservation->reservation_date);
+                        $reservationDate->format('Y-m-d');
+                        @endphp
+                        @if($reservationDate>$nowDate)
                         <form class="flex justify-end w-full" action="/edit" method="post">
                             @csrf
                             <input type="hidden" name="userId" value="{{Auth::user()->id}}">
@@ -78,6 +85,14 @@
                             <input type="hidden" name="number" value="{{$reservation->reservation_number}}">
                             <input type="submit" class="w-[100px] content-center mb-2 px-4 text-white bg-blue-400 rounded-[5px]" value="編集">
                         </form>
+                        @elseif($reservationDate<$nowDate)
+                        <form class="flex justify-end w-full" action="/review" method="post">
+                            @csrf
+                            <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                            <input type="hidden" name="shopId" value="{{$reservation->id}}">
+                            <input type="submit" class="w-[100px] content-center mb-2 px-4 text-white bg-blue-400 rounded-[5px]" value="評価">
+                        </form>
+                        @endif
                     </div>
                 </div>
                 @php
