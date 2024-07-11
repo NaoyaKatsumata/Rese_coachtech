@@ -104,7 +104,9 @@ class MypageController extends Controller
         return view('done',['userId'=>$userId]);
     }
 
-    public function review(){
-        return view('review');
+    public function review(Request $request){
+        $userId = $request->userId;
+        $shopId = $request->shopId;
+        return view('review',['userId'=>$userId,'shopId'=>$shopId]);
     }
 }

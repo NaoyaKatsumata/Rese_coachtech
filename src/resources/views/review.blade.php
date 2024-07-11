@@ -28,16 +28,25 @@
         </div>
     </header>
     <main class="py-24 mx-auto overflow-auto h-svh">
-        <div class="flex w-full justify-center mt-32">
-            <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star1">
-            <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star2">
-            <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star3">
-            <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star4">
-            <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star5">
-        </div>
-        <div class="flex w-full justify-center mt-16">
-        <textarea class="w-[60%] rounded-[5px] text-2xl" name="comment" cols="50" rows="6" maxlength="255"></textarea>
-        </div>
+        <form action="/store" method="post">
+            @csrf
+            <div class="flex w-full justify-center mt-32">
+                <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star1">
+                <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star2">
+                <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star3">
+                <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star4">
+                <img src="{{ asset('img/star_gray.svg')}}" class="w-[5%]" id="star5">
+            </div>
+            <input type="hidden" id="review" name="review" value="0">
+            <input type="hidden" id="userId" name="userId" value="{{$userId}}">
+            <input type="hidden" id="shopId" name="shopId" value="{{$shopId}}">
+            <div class="flex w-full justify-center mt-16">
+            <textarea class="w-[60%] rounded-[5px] text-2xl" name="comment" cols="50" rows="6" maxlength="255"></textarea>
+            </div>
+            <div class="flex justify-center mt-8">
+                <input type="submit" class="w-[100px] py-2 text-xl text-white bg-blue-300 rounded-[5px]" value="送信">
+            </div>
+        </form>
     </main>
 
     <!-- ログイン時メニュー -->
@@ -83,5 +92,6 @@
 
     <!-- javascript読み込み -->
     <script src="{{ asset('js/loginmenu.js') }}"></script>
+    <script src="{{ asset('js/review.js') }}"></script>
 </body>
 </html>
