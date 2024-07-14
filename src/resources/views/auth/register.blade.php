@@ -1,9 +1,9 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col pt-[200px] items-center pt-0 bg-gray-100">
         <!-- login -->
-        <p class="w-[30%] sm:max-w-md shadow-md px-4 py-4 overflow-hidden bg-blue-500 rounded-t-lg text-white">Registration</p>
+        <p class="w-[90%] sm:max-w-md shadow-md px-4 py-4 overflow-hidden bg-blue-500 rounded-t-lg text-white md:w-[30%]">Registration</p>
         <!-- 入力フォーム -->
-        <div class="w-[30%] sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden rounded-b-lg">
+        <div class="w-[90%] sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden rounded-b-lg md:w-[30%]">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 
 class ReservationControlloer extends Controller
 {
-    public function done(Request $request){
-        // dd($request);
+    public function done(ReservationRequest $request){
+        dd($request);
         $userId = $request->userId;
         $shopId = $request->shopId;
         $strnum = $request->num;

@@ -1,9 +1,9 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col pt-[200px] items-center pt-0 bg-gray-100">
         <!-- login -->
-        <p class="w-[30%] sm:max-w-md shadow-md px-4 py-4 overflow-hidden bg-blue-500 rounded-t-lg text-white">Login</p>
+        <p class="w-[90%] sm:max-w-md shadow-md px-4 py-4 overflow-hidden bg-blue-500 rounded-t-lg text-white md:w-[30%]">Login</p>
         <!-- 入力フォーム -->
-        <div class="w-[30%] sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden rounded-b-lg">
+        <div class="w-[90%] sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden rounded-b-lg md:w-[30%]">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -11,7 +11,7 @@
                 @csrf
                 <!-- Email Address -->
                 <div>
-                    <x-text-input id="email" class="block w-full mt-1 p-0 border-none focus:ring-0" type="email" name="email" :value="old('email')" placeholder="Email" required autofocus autocomplete="username" />
+                    <x-text-input id="email" class="block w-full mt-1 p-0 border-none focus:ring-0" type="text" name="email" :value="old('email')" placeholder="Email" autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     <div class="w-full border-b border-gray-500"></div>
                 </div>
@@ -22,7 +22,7 @@
                                     type="password"
                                     name="password"
                                     placeholder="Paassword"
-                                    required autocomplete="current-password" />
+                                    autocomplete="current-password" />
 
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     <div class="w-full border-b border-gray-500"></div>

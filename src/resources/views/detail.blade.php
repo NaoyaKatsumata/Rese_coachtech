@@ -68,7 +68,7 @@
                     @csrf
                         <input type="hidden" name="shopId" value="{{$shop->id}}">
                         <input type="hidden" name="userId" value="{{$userId}}">
-                        <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px]" name="date" id="date" value="{{date('Y-m-d')}}">
+                        <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px] w-[90%] md:w-[50%]" name="date" id="date" value="{{date('Y-m-d')}}">
                         <select class="mx-[5%] my-2 rounded-[5px]" name="time" id="time">
                             <option>11:00</option>
                             <option>12:00</option>
@@ -99,22 +99,29 @@
                         <table class="w-[90%] mx-auto">
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Shop</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="shopName">{{$shop->shop_name}}</td>
+                                <td class="w-[70%] py-2 px-4 text-left text-white" id="shopName">{{$shop->shop_name}}</td>
                             </tr>
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Date</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedDate">{{date('Y-m-d')}}</td>
+                                <td class="w-[70%] py-2 px-4 text-left text-white" id="selectedDate">{{date('Y-m-d')}}</td>
                             </tr>
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Time</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedTime">11:00</td>
+                                <td class="w-[70%] py-2 px-4 text-left text-white" id="selectedTime">11:00</td>
                             </tr>
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Number</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedNumber">1人</td>
+                                <td class="w-[70%] py-2 px-4 text-left text-white" id="selectedNumber">1人</td>
                             </tr>
                         </table>
                     </div>
+
+                    <div class="my-4">
+                        @foreach($errors->all() as $error)
+                        <li class="w-[90%] mx-[5%] mx-auto font-bold text-red-500">{{$error}}</li>
+                        @endforeach
+                    </div>
+
                     <div class="w-full mb-0 mt-auto">
                         <input type="submit" class="w-full py-4 text-center text-white bg-blue-700" name="" value="予約する">
                     </div>
@@ -156,7 +163,15 @@
         </div>
         <div id="loginContainer" class="absolute w-full my-32 text-center">
             <ul>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="userId" value="{{$userId}}">
+                                <input type="hidden" name="shopId" value="">
+                                <input type="hidden" name="area" value="All shop">
+                                <input type="hidden" name="category" value="">
+                                <input type="submit" value="Home">
+                            </form></li>
                 <li class="mb-2"><form class="text-2xl text-blue-500" method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -166,7 +181,13 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><a href="">Mypage</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/mypage">
+                                @csrf
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="My page">
+                            </form></li>
             </ul>
         </div>
     </div>

@@ -40,18 +40,26 @@
                 </div>
                 <div class="px-16 text-4xl text-blue-600 font-bold">Rese</div>
             </div>
-            <div class="flex">
-                <form action="/" method="post">
+            <div class="w-1/2 flex flex-col-reverse md:flex-row-reverse">
+                <form class="" action='/' method="post">
                     @csrf
                     @auth
                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endauth
                     @method('PATCH')
-                    <select class="border-none focus:ring-0" name="area" onchange="this.form.submit()">
-                    <option value="All area" @if($selectedArea == 'All area') selected @endif>All area</option>
-                    @foreach($areas as $area)
-                        <option value="{{$area->area_name}}" @if($selectedArea == $area->area_name) selected @endif>{{$area->area_name}}</option>
-                    @endforeach
+                    <input type="search" class="w-[100%] border-none focus:ring-0" name="shopName" size="20" placeholder="Search...">
+                </form>
+                <form class=""action="/" method="post">
+                    @csrf
+                    @auth
+                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                    @endauth
+                    @method('PATCH')
+                    <select class="w-full border-none focus:ring-0 md:w-full" name="category" onchange="this.form.submit()">
+                        <option value="All genre" @if($selectedCategory == 'All genre') selected @endif>All genre</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->category_name}}" @if($selectedCategory == $category->category_name) selected @endif>{{$category->category_name}}</option>
+                        @endforeach
                     </select>
                 </form>
                 <form action="/" method="post">
@@ -60,29 +68,21 @@
                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     @endauth
                     @method('PATCH')
-                    <select class="border-none focus:ring-0" name="category" onchange="this.form.submit()">
-                    <option value="All genre" @if($selectedCategory == 'All genre') selected @endif>All genre</option>
-                    @foreach($categories as $category)
-                        <option value="{{$category->category_name}}" @if($selectedCategory == $category->category_name) selected @endif>{{$category->category_name}}</option>
-                    @endforeach
+                    <select class="w-full border-none focus:ring-0 md:w-full" name="area" onchange="this.form.submit()">
+                        <option value="All area" @if($selectedArea == 'All area') selected @endif>All area</option>
+                        @foreach($areas as $area)
+                            <option value="{{$area->area_name}}" @if($selectedArea == $area->area_name) selected @endif>{{$area->area_name}}</option>
+                        @endforeach
                     </select>
-                </form>
-                <form action='/' method="post">
-                    @csrf
-                    @auth
-                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                    @endauth
-                    @method('PATCH')
-                    <input type="search" class="border-none focus:ring-0" name="shopName" size="40" placeholder="Search...">
                 </form>
             </div>
         </div>
     </header>
-    <main class="py-24 mx-auto overflow-auto h-svh">
+    <main class="py-44 md:py-24 mx-auto overflow-auto h-svh">
         <div class="flex flex-wrap">
             <!-- 店カード -->
             @foreach($shops as $shop )
-            <div class="flex-column break-words w-[24%] h-[300px] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
+            <div class="flex-column break-words w-[49%] h-[300px] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] md:w-[24%] h-[300px] mx-[0.5%]">
                 <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{ asset($shop->img)}}">
                 <div class="mx-4">
                     <div class="mt-4">{{$shop->shop_name}}</div>
@@ -111,15 +111,15 @@
                                         }
                                     @endphp
                                     @if($favoriteFlg)
-                                        <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                        <input id="id{{$shop->id}}" type="image" class="w-[30px] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                     @else
-                                        <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                        <input id="id{{$shop->id}}" type="image" class="w-[30px] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                     @endif
                                 @else
-                                    <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                    <input id="id{{$shop->id}}" type="image" class="w-[30px] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                                 @endisset
                             @else
-                                <input id="id{{$shop->id}}" type="image" class="w-[20%] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
+                                <input id="id{{$shop->id}}" type="image" class="w-[30px] mr-2 ml-auto" src="{{ asset('img/593_me_h.png')}}" formaction="/" value="{{$shop->id}}">
                             @endauth
                         </form>
                     </div>

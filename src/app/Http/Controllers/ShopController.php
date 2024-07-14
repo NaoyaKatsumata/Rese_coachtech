@@ -16,11 +16,13 @@ class ShopController extends Controller
         Auth::guard('web')->logout();
         $shops = Shop::all();
         $areas = Area::all();
+        // dd($shops);
         $categories = Category::all();
         return view('allshop',['shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
     }
 
     public function favorite(Request $request){
+        // dd($request);
         $userId = $request->userId;
         $shopId = $request->shopId;
         $selectedArea = $request->area;

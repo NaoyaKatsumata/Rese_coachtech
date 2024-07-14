@@ -32,11 +32,11 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+    // /**
+    //  * Attempt to authenticate the request's credentials.
+    //  *
+    //  * @throws \Illuminate\Validation\ValidationException
+    //  */
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
@@ -81,5 +81,16 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+    }
+
+    public function messages()
+    {
+      return [
+        'email.required' => 'メールアドレスを入力してください',
+        'email.string' => '文字で入力してください',
+        'email.email' => 'メールアドレスのフォーマットを入力してください',
+        'password.required' => 'パスワードを入力してください',
+        'password.string' => 'パスワードを文字で入力してください',
+      ];
     }
 }

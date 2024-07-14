@@ -56,19 +56,19 @@
                         <table class="w-[90%] mx-auto text-white">
                             <tr>
                                 <td class="w-[20%] pb-4">Shop</td>
-                                <td class="w-[80%]">{{$reservation->shop_name}}</td>
+                                <td class="w-[80%] pb-4 px-4">{{$reservation->shop_name}}</td>
                             </tr>
                             <tr>
                                 <td class="w-[20%] pb-4">Date</td>
-                                <td class="w-[80%]">{{$reservation->reservation_date}}</td>
+                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_date}}</td>
                             </tr>
                             <tr>
                             <td class="w-[20%] pb-4">Time</td>
-                                <td class="w-[80%]">{{$reservation->reservation_time}}</td>
+                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_time}}</td>
                             </tr>
                             <tr>
                             <td class="w-[20%] pb-4">Number</td>
-                                <td class="w-[80%]">{{$reservation->reservation_number}}人</td>
+                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_number}}人</td>
                             </tr>
                         </table>
                         @php
@@ -105,7 +105,7 @@
                 <div class="flex flex-wrap">
                     <!-- 店カード -->
                     @foreach($favorites as $favorite )
-                    <div class="flex-column break-words w-[40%] h-[300px] mr-[10%] my-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
+                    <div class="flex-column break-words w-[90%] h-[300px] mr-[3%] bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] md:w-[47%]">
                         <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{ asset($favorite->img)}}">
                         <div class="mx-4">
                             <div class="mt-4">{{$favorite->shop_name}}</div>
@@ -124,7 +124,7 @@
                                     @auth
                                         <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                         <input type="hidden" name="shopId" value="{{$favorite->shop_id}}">
-                                        <input id="id{{$favorite->id}}" type="image" class="w-[20%] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}">
+                                        <input id="id{{$favorite->id}}" type="image" class="w-[30px] mr-2 ml-auto active" src="{{ asset('img/593_me_h.png')}}">
                                     @endauth
                                 </form>
                             </div>
