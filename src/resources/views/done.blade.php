@@ -27,7 +27,7 @@
         </div>
     </header>
     <main class="py-24 mx-auto overflow-auto h-svh">
-        <div class="w-[40%] mx-auto bg-white shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
+        <div class="w-[90%] mx-auto bg-white shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] md:w-[40%]">
             <form action="/" class="flex flex-col content-center" method="post">
                 @csrf
                 @method('PUT')

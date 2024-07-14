@@ -9,7 +9,7 @@ use App\Models\Reservation;
 class ReservationControlloer extends Controller
 {
     public function done(ReservationRequest $request){
-        dd($request);
+        // dd($request);
         $userId = $request->userId;
         $shopId = $request->shopId;
         $strnum = $request->num;
