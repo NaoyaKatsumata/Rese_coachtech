@@ -22,7 +22,8 @@
                             </div>
                         </div>
                         @php
-                            $userId=Auth::user()->id;
+                            $userId = Auth::user()->id;
+                            $authority = Auth::user()->authority;
                         @endphp
                     @else
                         <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
@@ -33,7 +34,7 @@
                             </div>
                         </div>
                         @php
-                            $userId='';
+                            $userId = '';
                         @endphp
                     @endauth
                 </div>
@@ -50,7 +51,7 @@
                     <a href="javascript:history.back();" class="border mt-2 w-[30px] h-[30px] bg-white rounded-[5px] content-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">＜</a>
                     <p class="mx-4 text-4xl">{{$shop->shop_name}}</p>
                 </div>
-                <img class="object-cover w-full rounded-t-[10px] py-4" src="{{ asset($shop->img)}}">
+                <img class="object-cover w-full rounded-t-[10px] py-4" src="{{ asset('storage/'.$shop->img)}}" alt="No Image">
                 <div class="py-4">
                     <p class="inline-block">#{{$shop->area_name}}</p>
                     <p class="inline-block pl-2">#{{$shop->category_name}}</p>
@@ -127,8 +128,8 @@
         </div>
     </main>
 
-    <!-- 未ログイン時メニュー -->
-    <div class="absolute w-[90%] mx-auto my-6 top-[0px]">
+<!-- 未ログイン時メニュー -->
+<div class="absolute w-[90%] mx-auto my-6 top-[0px]">
         <div id="menuBg" class="w-full h-full fixed top-[0px] left-[0px] bottom-[0px] bg-white"></div>
         <div id="close" class="w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
             <div class="w-[70%] mx-auto">
@@ -160,7 +161,15 @@
         </div>
         <div id="loginContainer" class="absolute w-full my-32 text-center">
             <ul>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="userId" value="{{$userId}}">
+                                <input type="hidden" name="shopId" value="">
+                                <input type="hidden" name="area" value="All shop">
+                                <input type="hidden" name="category" value="">
+                                <input type="submit" value="Home">
+                            </form></li>
                 <li class="mb-2"><form class="text-2xl text-blue-500" method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -170,7 +179,27 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><a href="">Mypage</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/mypage">
+                                @csrf
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="My page">
+                            </form></li>
+                
+                @auth
+                @if($authority == 1)
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/registerAdmin">
+                                @csrf
+                                @method('patch')
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="Registration">
+                            </form></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/ownersetting">OwnerSetting</a></li>
+                @endauth
+                @endif
             </ul>
         </div>
     </div>

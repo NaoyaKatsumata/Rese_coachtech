@@ -18,6 +18,12 @@
         <link rel="stylesheet" href="{{ asset('css/allshop.css') }}">
     </head>
     <body id="body" class="bg-zinc-100 overflow-hidden w-[90%] mx-auto">
+        @auth
+            @php
+                $userId = Auth::user()->id;
+                $authority = Auth::user()->authority;
+            @endphp
+        @endauth
         <!-- アイコン&タイトル -->
     <header class="fixed w-[90%] mx-auto bg-zinc-100 ">
         <div class="flex mx-auto my-6 justify-between">
@@ -81,7 +87,17 @@
         </div>
         <div id="loginContainer" class="absolute w-full my-32 text-center">
             <ul>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/">
+                                @csrf
+                                @method('PUT')
+                                @auth
+                                <input type="hidden" name="userId" value="{{$userId}}">
+                                @endauth
+                                <input type="hidden" name="shopId" value="">
+                                <input type="hidden" name="area" value="All shop">
+                                <input type="hidden" name="category" value="">
+                                <input type="submit" value="Home">
+                            </form></li>
                 <li class="mb-2"><form class="text-2xl text-blue-500" method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -91,7 +107,27 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><a href="">Mypage</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/mypage">
+                                @csrf
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="My page">
+                            </form></li>
+                
+                @auth
+                @if($authority == 1)
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/registerAdmin">
+                                @csrf
+                                @method('patch')
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="Registration">
+                            </form></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/ownersetting">OwnerSetting</a></li>
+                @endauth
+                @endif
             </ul>
         </div>
     </div>

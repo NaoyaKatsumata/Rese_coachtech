@@ -13,6 +13,7 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Models\Area;
 use App\Models\Category;
+use Carbon\Carbon;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -24,27 +25,36 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function sendTokenEmail(Request $request) {
+        return view('auth.onetime');
+    }
+
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request)
+    public function auth(Request $request)
     {
-        $request->authenticate();
+        // $request->authenticate();
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
+        $email = session('email');
+        $user = User::where('email', $email)->first();
+        $expiration = new Carbon($user['onetime_token']);
 
-        $user_email = User::where('email','=',$request->email)->first()->email;
-        $userFavorites = User::select('users.id','favorites.shop_id')
-        ->where('users.email','=',$user_email)
-        ->join('favorites','users.id','=','favorites.user_id')
-        ->get();
-        $shops = Shop::all();
-        $areas = Area::all();
-        $categories = Category::all();
-        $request->session()->regenerateToken();
-        // dd($userFavorites);
-        return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
-
+        if ($user['onetime_token'] == $request->onetime_token && $expiration > now()) {
+            Auth::login($user);
+            $userFavorites = User::select('users.id','favorites.shop_id')
+            ->where('users.email','=',$email)
+            ->join('favorites','users.id','=','favorites.user_id')
+            ->get();
+            $shops = Shop::all();
+            $areas = Area::all();
+            $categories = Category::all();
+            $request->session()->regenerateToken();
+            // dd($userFavorites);
+            return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
+        }
+        return redirect('auth.login');
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 

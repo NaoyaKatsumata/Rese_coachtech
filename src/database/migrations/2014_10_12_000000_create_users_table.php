@@ -20,6 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->integer('authority')->default(3);
+            $table->char("onetime_token", 4)->nullable();
+            $table->dateTime("onetime_expiration")->nullable();
             $table->timestamps();
         });
     }

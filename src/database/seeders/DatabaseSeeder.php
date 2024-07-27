@@ -14,15 +14,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'administrator',
+            'email' => 'administrator@gmail.com',
+            'password'=>'$2y$10$5UUw/P7yr1L9dlPm2TqgJOxKANVPcD5ETy.f3E1GM/2lFLQqCVgD2',
+            'authority'=>'1',
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'owner',
+            'email' => 'owner@gmail.com',
+            'password'=>'$2y$10$5UUw/P7yr1L9dlPm2TqgJOxKANVPcD5ETy.f3E1GM/2lFLQqCVgD2',
+            'authority'=>'2',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'password'=>'$2y$10$5UUw/P7yr1L9dlPm2TqgJOxKANVPcD5ETy.f3E1GM/2lFLQqCVgD2',
+            'authority'=>'3',
+        ]);
+
         $this->call(ShopsTableSeeder::class);
         $this->call(AreasTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(ReviewsTableSeeder::class);
+        $this->call(AuthoritiesTableSeeder::class);
     }
 }

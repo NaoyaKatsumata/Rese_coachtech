@@ -5,6 +5,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationControlloer;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShopEditController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/review',[MypageController::class,'review']);
     Route::post('/done',[ReservationControlloer::class,'done']);
     Route::post('/store',[ReviewController::class,'store']);
+    Route::put('editOwner',[ShopEditController::class,'editOwner']);
+    Route::patch('editDetail',[ShopEditController::class,'editDetail']);
+    Route::get('/addShop',[ShopEditController::class,'addShop']);
+    Route::post('/store',[ShopEditController::class,'store']);
 });
 Route::get('/', [Shopcontroller::class,'shopAll']);
 Route::patch('/',[Shopcontroller::class,'search']);

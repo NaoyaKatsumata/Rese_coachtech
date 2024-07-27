@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Favorite;
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\Reservation;
+use App\Models\Owner;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -27,6 +29,8 @@ class ShopController extends Controller
         $shopId = $request->shopId;
         $selectedArea = $request->area;
         $selectedCategory = $request->category;
+        $owners = Owner::where("user_id","=",$userId)
+        ->get();
         $request->session()->regenerateToken();
         // dd($userId,$shopId);
         if($request->area === 'All shop'){
@@ -69,7 +73,7 @@ class ShopController extends Controller
         $areas = Area::all();
         //全カテゴリー取得
         $categories = Category::all();
-        return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory]);
+        return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners]);
     }
 
     public function search(Request $request){
@@ -107,18 +111,33 @@ class ShopController extends Controller
 
     public function detail(Request $request){
         $shopId = $request->shopId;
+        $errStatus=false;
+
         $shop = Shop::where("id","=",$shopId)
         ->first();
-        $area = Shop::select('areas.area_name')
-        ->join("areas","shops.area_id","=","areas.id")
+        $selectedArea = Shop::join("areas","shops.area_id","=","areas.id")
         ->where("shops.id","=",$shopId)
         ->first();
+        $areas = Area::all();
 
-        $category = Shop::select('categories.category_name')
-        ->join("categories","shops.category_id","=","categories.id")
+        $selectedCategory = Shop::join("categories","shops.category_id","=","categories.id")
         ->where("shops.id","=",$shopId)
         ->first();
+        $categories = Category::all();
+
+        $owners = Owner::where("owners.shop_id","=",$shopId)
+        ->join("users","users.id","=","owners.user_id")
+        ->get();
+
+        $reservationDate = date("Y/m/d");
+        // $reservationDate->format('Y-m-d');
+        // dd($reservationDate);
+        $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
+        ->where("shop_id","=",$shopId)
+        ->where("reservation_date",">=",$reservationDate)
+        ->get();
+        // dd($owners,$shopId,$userId);
         // dd($request,$shop,$area,$category);
-        return view('detail',['shop'=>$shop,'area'=>$area,'category'=>$category]);
+        return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'errStatus'=>$errStatus]);
     }
 }

@@ -24,6 +24,7 @@
                         </div>
                         @php
                             $userId = Auth::user()->id;
+                            $authority = Auth::user()->authority;
                         @endphp
                     @else
                         <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
@@ -83,7 +84,8 @@
             <!-- 店カード -->
             @foreach($shops as $shop )
             <div class="flex-column break-words w-[49%] h-[300px] mx-[0.5%] mb-4 bg-white rounded-[10px] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] md:w-[24%] h-[300px] mx-[0.5%]">
-                <img class="object-cover w-full h-1/2 rounded-t-[10px]" src="{{ asset($shop->img)}}">
+                <img class="object-cover w-full h-1/2 rounded-t-[10px] text-center text-4xl" src="{{ asset('storage/'.$shop->img)}}" alt="No Image">
+
                 <div class="mx-4">
                     <div class="mt-4">{{$shop->shop_name}}</div>
                     <div class="flex">
@@ -94,6 +96,21 @@
                         <form class="flex content-center " action="/detail" method="get">
                             <input type="hidden" name="shopId" value="{{$shop->id}}">
                             <input type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-[5px]" value="詳しくみる"/>
+                            @auth
+                                @isset($owners)
+                                @php
+                                    $ownerFlg=False;
+                                    foreach($owners as $owner){
+                                        if($owner->shop_id == $shop->id){
+                                            $ownerFlg=True;
+                                        }
+                                    }
+                                @endphp
+                                    @if($ownerFlg)
+                                        <input type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-[5px]" value="編集">
+                                    @endif
+                                @endisset
+                            @endauth
                         </form>
                         <form class="flex w-full" action="/" method="post">
                             @csrf
@@ -188,6 +205,20 @@
                                 @endauth
                                 <input type="submit" value="My page">
                             </form></li>
+                
+                @auth
+                @if($authority == 1)
+                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/registerAdmin">
+                                @csrf
+                                @method('patch')
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @endauth
+                                <input type="submit" value="Registration">
+                            </form></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/addShop">Add shop</a></li>
+                @endauth
+                @endif
             </ul>
         </div>
     </div>

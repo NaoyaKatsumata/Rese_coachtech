@@ -11,7 +11,7 @@ class Shop extends Model
 {
     use HasFactory;
 
-    protected $fillable=['shop_name','detail','category','img','area_id'];
+    protected $fillable=['shop_name','detail','category_id','img','area_id'];
 
     public function area(){
         return $this->belongsTo(Area::class);

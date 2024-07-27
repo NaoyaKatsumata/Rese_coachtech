@@ -20,7 +20,10 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
-    Route::post('/', [AuthenticatedSessionController::class, 'store']);
+    Route::post('sendTokenEmail', [RegisteredUserController::class, 'sendTokenEmail'])
+                ->name('sendTokenEmail');
+
+    Route::post('/', [AuthenticatedSessionController::class, 'auth']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -56,4 +59,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+    
+    Route::patch('registerAdmin', [RegisteredUserController::class, 'createAdmin'])
+                ->name('registerAdmin');
+
+    Route::post('registerAdmin', [RegisteredUserController::class, 'storeAdmin']);
 });

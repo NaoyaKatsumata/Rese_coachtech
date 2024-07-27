@@ -21,14 +21,14 @@ class MypageController extends Controller
         ->orderBy('reservation_date','asc')
         ->orderBy('reservation_time','asc')
         ->get();
-        $favorites = Shop::join("favorites","shops.id","=","favorites.shop_id")
+        $shops = Shop::join("favorites","shops.id","=","favorites.shop_id")
         ->join("areas","areas.id","=","shops.area_id")
         ->join("categories","categories.id","=","shops.category_id")
         ->where("user_id","=",$userId)
         ->get();
 
         // dd($userName,$reservations,$favorites);
-        return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites]);
+        return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'shops'=>$shops,"userId"=>$userId]);
     }
 
     public function delete(Request $request){

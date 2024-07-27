@@ -7,7 +7,7 @@
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <form method="POST" action="/">
+            <form method="POST" action="sendTokenEmail">
                 @csrf
                 <!-- Email Address -->
                 <div>
@@ -17,7 +17,7 @@
                 </div>
 
                 <!-- Password -->
-                <div class="mt-4">
+                <!-- <div class="mt-4">
                     <x-text-input id="password" class="block mt-1 p-0 w-full border-none focus:ring-0"
                                     type="password"
                                     name="password"
@@ -26,11 +26,11 @@
 
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     <div class="w-full border-b border-gray-500"></div>
-                </div>
+                </div> -->
 
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="ml-3">
-                        ログイン
+                        認証コード送信
                     </x-primary-button>
                 </div>
             </form>
