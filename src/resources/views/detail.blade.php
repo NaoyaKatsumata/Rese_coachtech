@@ -26,10 +26,11 @@
                                 <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
                             </div>
                         </div>
-                        @php
-                            $userId=Auth::user()->id;
-                        @endphp
                     @else
+                        @php
+                            $authority = '3';
+                            $ownerFlg = false;
+                        @endphp
                         <div id="gestMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
                             <div class="w-[70%] mx-auto">
                                 <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
@@ -130,43 +131,42 @@
         <div class="w-[90%] ml-[10%]">
                 <p class="my-4 font-bold text-xl">予約状況</p>
                 @php
-                $count = 1;
+                    $count = 1;
                 @endphp
                 @foreach($reservationList as $reservation)
                 <div class="w-[90%] mr-[10%] bg-blue-500 rounded-[10px]">
                     <div class="flex">
                         <i class="content-center mx-4 fa-regular fa-clock fa-lg clock-color"></i>
                         <p class="my-4 text-white">予約{{$count}}</p>
-                        <form class="mt-4 ml-auto mr-4" action="/delete" method="post">
-                            @method("PUT")
-                            @csrf
-                            <input type="hidden" name="shopId" value="{{$reservation->id}}">
-                            <input type="hidden" name="userId" value="{{Auth::user()->id}}">
-                            <button type="submit">
-                                <i class="fa-solid fa-trash fa-lg clock-color"></i>
-                            </button>
-                        </form>
                     </div>
-                    <div class="mx-4 mb-4">
-                        <table class="w-[90%] mx-auto text-white">
-                            <tr>
-                                <td class="w-[20%] pb-4">Shop</td>
-                                <td class="w-[80%] pb-4 px-4">{{$reservation->shop_name}}</td>
-                            </tr>
-                            <tr>
-                                <td class="w-[20%] pb-4">Date</td>
-                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_date}}</td>
-                            </tr>
-                            <tr>
-                            <td class="w-[20%] pb-4">Time</td>
-                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_time}}</td>
-                            </tr>
-                            <tr>
-                            <td class="w-[20%] pb-4">Number</td>
-                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_number}}人</td>
-                            </tr>
-                        </table>
-                    </div>
+                    <form action="info" method="post">
+                        @csrf
+                        <div class="mx-4 mb-4">
+                            <table class="w-[90%] mx-auto text-white">
+                                <tr>
+                                    <td class="w-[20%] pb-4">User</td>
+                                    <td class="w-[80%] pb-4 px-4">{{$reservation->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="w-[20%] pb-4">Date</td>
+                                    <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_date}}</td>
+                                </tr>
+                                <tr>
+                                <td class="w-[20%] pb-4">Time</td>
+                                    <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_time}}</td>
+                                </tr>
+                                <tr>
+                                <td class="w-[20%] pb-4">Number</td>
+                                    <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_number}}人</td>
+                                </tr>
+                            </table>
+                            <div class="flex justify-end">
+                                <input type="hidden" name="user" value="{{$reservation->name}}">
+                                <input type="hidden" name="email" value="{{$reservation->email}}">
+                                <input type="submit" class="inline-block w-[150px] ml-auto mr-[0px] mb-4 py-4 text-center text-white bg-blue-700 rounded-[5px]" value="お知らせメール">
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 @php
                 $count += 1

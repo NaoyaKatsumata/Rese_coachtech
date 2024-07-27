@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('editDetail',[ShopEditController::class,'editDetail']);
     Route::get('/addShop',[ShopEditController::class,'addShop']);
     Route::post('/store',[ShopEditController::class,'store']);
+    Route::post('/info',[ShopEditController::class,'createMail']);
+    Route::post('/sendMailComp',[ShopEditController::class,'sendMail']);
 });
 Route::get('/', [Shopcontroller::class,'shopAll']);
 Route::patch('/',[Shopcontroller::class,'search']);

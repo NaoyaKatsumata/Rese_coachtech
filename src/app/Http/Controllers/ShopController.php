@@ -133,6 +133,7 @@ class ShopController extends Controller
         // $reservationDate->format('Y-m-d');
         // dd($reservationDate);
         $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
+        ->join("users","users.id","=","reservations.user_id")
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();

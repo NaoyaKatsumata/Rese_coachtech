@@ -9,6 +9,8 @@ use App\Models\Shop;
 use App\Models\Owner;
 use App\Models\User;
 use App\Models\Reservation;
+use App\Mail\SendInfo;
+use Illuminate\Support\Facades\Mail;
 
 class ShopEditController extends Controller
 {
@@ -176,5 +178,22 @@ class ShopEditController extends Controller
             'area_id'=> $areaId,
         ]);
         return view('storeComp');
+    }
+
+    public function createMail(Request $request){
+        $email = $request->email;
+        return view('createMail',['email'=>$email]);
+    }
+
+    public function sendMail(Request $request){
+        $userId = $request->userId;
+        $email = $request->email;
+        $text = $request->info;
+
+        session()->flash('email', $email); // 認証処理で利用するために一時的に格納
+        Mail::to($email)->send(new SendInfo($text));
+
+
+        return view('sendMailComp',['userId'=>$userId]);
     }
 }
