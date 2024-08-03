@@ -125,8 +125,11 @@ class ShopController extends Controller
         ->first();
         $categories = Category::all();
 
-        $owners = Owner::where("owners.shop_id","=",$shopId)
-        ->join("users","users.id","=","owners.user_id")
+        $nowOwner = Owner::join("users","users.id","=","owners.user_id")
+        ->where("owners.shop_id","=",$shopId)
+        ->orderBy('owners.created_at','desc')
+        ->first();
+        $owners = User::where("authority","=","2")
         ->get();
 
         $reservationDate = date("Y/m/d");
@@ -137,8 +140,7 @@ class ShopController extends Controller
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();
-        // dd($owners,$shopId,$userId);
-        // dd($request,$shop,$area,$category);
-        return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'errStatus'=>$errStatus]);
+        // dd($nowOwner);
+        return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'errStatus'=>$errStatus,'nowOwner'=>$nowOwner]);
     }
 }

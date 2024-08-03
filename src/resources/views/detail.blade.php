@@ -19,6 +19,13 @@
                             $userId = Auth::user()->id;
                             $ownerFlg = false;
                         @endphp
+                        @foreach($owners as $owner)
+                            @php
+                                if($owner->user_id == $userId){
+                                    $ownerFlg = True;
+                                }
+                            @endphp
+                        @endforeach
                         <div id="loginMenu" class="relative w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
                             <div class="w-[70%] mx-auto">
                                 <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
@@ -52,13 +59,6 @@
         <!-- 店の詳細表示エリア -->
         <div class="flex pt-24 w-1/2">
             <div class="w-[100%]">
-                @foreach($owners as $owner)
-                    @php
-                        if($owner->user_id == $userId){
-                            $ownerFlg = True;
-                        }
-                    @endphp
-                @endforeach
                 <div class="flex">
                     <a href="javascript:history.back();" class="border mt-2 w-[30px] h-[30px] bg-white rounded-[5px] content-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">＜</a>
                     @if($authority == 1 or $ownerFlg == True)
@@ -76,7 +76,7 @@
                             <select name="userId" class="rounded-[5px]">
                                 <option value="0" @if($userId == 0) selected @endif>オーナーを選択してください</option>
                                 @foreach($owners as $owner)
-                                <option value="{{$owner->id}}" @if($userId == $owner->id) selected @endif>{{$owner->name}}</option>
+                                <option value="{{$owner->id}}" @if(isset($nowOwner) and $nowOwner->id == $owner->id) selected @endif>{{$owner->name}}</option>
                                 @endforeach
                             </select>
                             <input type="hidden" name="shopId" value="{{$shop->id}}">
@@ -178,7 +178,7 @@
             <div class="absolute top-[24px] left-[50%] w-1/2 h-[90%]">
                 <div class="flex flex-col  w-[80%] h-full mx-auto bg-blue-600 rounded-[5px]">
                     <p class="mx-[5%] pt-8 text-white text-xl font-bold">予約</p>
-                        <form class="flex flex-col w-full mx-auto h-full" action="/done" method="post">
+                    <form class="flex flex-col w-full mx-auto h-full" action="/done" method="post">
                         @csrf
                             <input type="hidden" name="shopId" value="{{$shop->id}}">
                             <input type="hidden" name="userId" value="{{$userId}}">

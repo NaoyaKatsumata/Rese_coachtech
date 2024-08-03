@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
         // $request->session()->regenerate();
         $email = session('email');
         $user = User::where('email', $email)->first();
-        $expiration = new Carbon($user['onetime_token']);
+        $expiration = new Carbon($user->onetime_expiration);
 
         if ($user['onetime_token'] == $request->onetime_token && $expiration > now()) {
             Auth::login($user);
@@ -54,7 +54,12 @@ class AuthenticatedSessionController extends Controller
             // dd($userFavorites);
             return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
         }
-        return redirect('auth.login');
+        $errorMessage = [
+            'sessionOut' => '認証コードの期限が切れました。再度お試しください。',
+        ];
+        return redirect('/login')
+                         ->with('customErrors', $errorMessage)
+                         ->withInput($request->all());
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 

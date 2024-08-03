@@ -22,7 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->integer('authority')->default(3);
             $table->char("onetime_token", 4)->nullable();
-            $table->dateTime("onetime_expiration")->nullable();
+            $table->timestamp("onetime_expiration")->nullable();
             $table->timestamps();
         });
     }

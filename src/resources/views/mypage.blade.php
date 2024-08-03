@@ -11,6 +11,7 @@
 <body id="body" class="bg-zinc-100 overflow-hidden w-[90%] mx-auto">
     @php
         $authority = Auth::user()->authority;
+        $userId = Auth::user()->id;
     @endphp
     <!-- アイコン&タイトル -->
     <header class="fixed w-[90%] mx-auto bg-zinc-100 ">
@@ -41,6 +42,11 @@
                 @endphp
                 @foreach($reservations as $reservation)
                 <div class="w-[90%] mr-[10%] bg-blue-500 rounded-[10px]">
+                    @php
+                    $timestamp = explode(" ", $reservation->reservation_date);
+                    $date = $timestamp[0];
+                    $time = $timestamp[1];
+                    @endphp
                     <div class="flex">
                         <i class="content-center mx-4 fa-regular fa-clock fa-lg clock-color"></i>
                         <p class="my-4 text-white">予約{{$count}}</p>
@@ -62,11 +68,11 @@
                             </tr>
                             <tr>
                                 <td class="w-[20%] pb-4">Date</td>
-                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_date}}</td>
+                                <td class="w-[80%] pb-4 px-4">{{$date}}</td>
                             </tr>
                             <tr>
                             <td class="w-[20%] pb-4">Time</td>
-                                <td class="w-[80%] pb-4 px-4">{{$reservation->reservation_time}}</td>
+                                <td class="w-[80%] pb-4 px-4">{{$time}}</td>
                             </tr>
                             <tr>
                             <td class="w-[20%] pb-4">Number</td>

@@ -9,7 +9,10 @@
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
 </head>
 <body id="body" class="bg-zinc-100 overflow-hidden w-[90%] mx-auto">
-
+    @php
+        $authority = Auth::user()->authority;
+        $userId = Auth::user()->id;
+    @endphp
     <!-- アイコン&タイトル -->
     <header class="fixed w-[90%] mx-auto bg-zinc-100 ">
         <div class="flex mx-auto my-6 justify-between">
@@ -48,6 +51,26 @@
             </div>
         </form>
     </main>
+    <!-- 未ログイン時メニュー -->
+    <div class="absolute w-[90%] mx-auto my-6 top-[0px]">
+        <div id="menuBg" class="w-full h-full fixed top-[0px] left-[0px] bottom-[0px] bg-white"></div>
+        <div id="close" class="w-[40px] h-[40px] bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
+            <div class="w-[70%] mx-auto">
+                <div class="absolute top-[10px] w-[50%] h-[1px] bg-white mx-auto"></div>
+                <div class="absolute top-[20px] w-[70%] h-[1px] bg-white"></div>
+                <div class="absolute top-[30px] w-[20%] h-[1px] bg-white"></div>
+            </div>
+        </div>
+        <div id="gestContainer" class="absolute w-full my-32 text-center">
+            <ul>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/register">Registration</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+    
+
 
     <!-- ログイン時メニュー -->
     <div class="absolute w-[90%] mx-auto my-6 top-[0px]">

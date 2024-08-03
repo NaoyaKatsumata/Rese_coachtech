@@ -43,15 +43,19 @@ class ReviewController extends Controller
         $reservations = Reservation::join("shops","shops.id","=","reservations.shop_id")
         ->where("user_id","=",$userId)
         ->orderBy('reservation_date','asc')
-        ->orderBy('reservation_time','asc')
         ->get();
         $favorites = Shop::join("favorites","shops.id","=","favorites.shop_id")
         ->join("areas","areas.id","=","shops.area_id")
         ->join("categories","categories.id","=","shops.category_id")
         ->where("user_id","=",$userId)
         ->get();
+        $shops = Shop::join("favorites","shops.id","=","favorites.shop_id")
+        ->join("areas","areas.id","=","shops.area_id")
+        ->join("categories","categories.id","=","shops.category_id")
+        ->where("user_id","=",$userId)
+        ->get();
 
         // dd($userName,$reservations,$favorites);
-        return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites]);
+        return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites,'shops'=>$shops]);
     }
 }

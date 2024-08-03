@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::put('editOwner',[ShopEditController::class,'editOwner']);
     Route::patch('editDetail',[ShopEditController::class,'editDetail']);
     Route::get('/addShop',[ShopEditController::class,'addShop']);
-    Route::post('/store',[ShopEditController::class,'store']);
+    Route::post('/editstore',[ShopEditController::class,'store']);
     Route::post('/info',[ShopEditController::class,'createMail']);
     Route::post('/sendMailComp',[ShopEditController::class,'sendMail']);
 });

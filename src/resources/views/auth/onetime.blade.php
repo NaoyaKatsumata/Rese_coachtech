@@ -5,7 +5,7 @@
     <div class="w-[90%] sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden rounded-b-lg md:w-[30%]">
         <form method="POST" action="/">
             @csrf
-            <!-- Email Address -->
+            <!-- 認証コード -->
             <div class="mt-4">
                 <x-input-label for="onetime_token" value="認証コード" />
                 <x-text-input id="onetime_token" class="block mt-1 w-full" type="number" name="onetime_token" :value="old('onetime_token')" required/>

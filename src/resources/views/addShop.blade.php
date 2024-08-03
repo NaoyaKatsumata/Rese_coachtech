@@ -48,7 +48,7 @@
     </header>
 
     <main class="py-24 md:mx-auto overflow-auto h-svh">
-        <form class="flex flex-col w-full md:w-1/2" action="store" method="post" enctype="multipart/form-data">
+        <form class="flex flex-col w-full md:w-1/2" action="editstore" method="post" enctype="multipart/form-data">
             @csrf
             <label for="shopName">店名：</label>
             <input type="text" class="py-2" id="shopName" name="shopName">

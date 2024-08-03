@@ -63,16 +63,38 @@ class RegisteredUserController extends Controller
      */
     public function sendTokenEmail(Request $request) {
         $email = $request->email;
+        $password = $request->password;
         $onetime_token = "";
 
-        for ($i = 0; $i < 4; $i++) {
+        $user = User::where('email','=',$email)
+        ->first();
+
+        if(!($user)){
+            $errorMessage = [
+                'email' => 'メールアドレスが登録されていません',
+            ];
+            return redirect()->back()
+                         ->with('customErrors', $errorMessage)
+                         ->withInput($request->all());
+        }else if(!(Hash::check($password, $user->password))){
+            $errorMessages = [
+                'pass' => 'パスワードが一致しません',
+            ];
+            return redirect()->back()
+                         ->with('customErrors', $errorMessages)
+                         ->withInput($request->all());
+        }
+
+        $onetime_token .= strval(rand(1, 9));
+        for ($i = 0; $i < 3; $i++) {
             $onetime_token .= strval(rand(0, 9)); // ワンタイムトークン
         }
         $onetime_expiration = now()->addMinute(3); // 有効期限
 
         $user = User::where('email', $email)->first(); // 受け取ったメールアドレスで検索
         if ($user === null) {
-            RegisteredUserController::storeEmailAndToken($email, $onetime_token, $onetime_expiration);
+            // RegisteredUserController::storeEmailAndToken($email, $onetime_token, $onetime_expiration);
+            return view('auth.register');
         } else {
             RegisteredUserController::storeToken($email, $onetime_token, $onetime_expiration);
         }

@@ -209,7 +209,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+
     ])->toArray(),
 
+    // 'aliases' => [
+    //     // 他のエイリアス
+    //     'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+    // ],
 ];

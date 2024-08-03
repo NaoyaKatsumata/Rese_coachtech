@@ -8,6 +8,7 @@ use App\Models\Favorite;
 use App\Models\User;
 use App\Models\Shop;
 use App\Models\Area;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MypageController extends Controller
 {
@@ -19,13 +20,13 @@ class MypageController extends Controller
         $reservations = Reservation::join("shops","shops.id","=","reservations.shop_id")
         ->where("user_id","=",$userId)
         ->orderBy('reservation_date','asc')
-        ->orderBy('reservation_time','asc')
         ->get();
         $shops = Shop::join("favorites","shops.id","=","favorites.shop_id")
         ->join("areas","areas.id","=","shops.area_id")
         ->join("categories","categories.id","=","shops.category_id")
         ->where("user_id","=",$userId)
         ->get();
+        // $qrCode = QrCode::size(200)->generate('https://example.com');
 
         // dd($userName,$reservations,$favorites);
         return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'shops'=>$shops,"userId"=>$userId]);
@@ -45,16 +46,20 @@ class MypageController extends Controller
         $reservations = Reservation::join("shops","shops.id","=","reservations.shop_id")
         ->where("user_id","=",$userId)
         ->orderBy('reservation_date','asc')
-        ->orderBy('reservation_time','asc')
         ->get();
         $favorites = Shop::join("favorites","shops.id","=","favorites.shop_id")
         ->join("areas","areas.id","=","shops.area_id")
         ->join("categories","categories.id","=","shops.category_id")
         ->where("user_id","=",$userId)
         ->get();
+        $shops = Shop::join("favorites","shops.id","=","favorites.shop_id")
+        ->join("areas","areas.id","=","shops.area_id")
+        ->join("categories","categories.id","=","shops.category_id")
+        ->where("user_id","=",$userId)
+        ->get();
 
         // dd($userName,$reservations,$favorites);
-        return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites]);
+        return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites,'shops'=>$shops]);
     }
 
     public function edit(Request $request){

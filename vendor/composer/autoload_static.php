@@ -54,6 +54,7 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
             'Symfony\\Component\\HttpFoundation\\' => 33,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Console\\' => 26,
+            'SimpleSoftwareIO\\QrCode\\' => 24,
         ),
         'P' => 
         array (
@@ -88,6 +89,7 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
         array (
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Common\\Lexer\\' => 22,
+            'DASPRiD\\Enum\\' => 13,
         ),
         'C' => 
         array (
@@ -97,6 +99,7 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'BaconQrCode\\' => 12,
         ),
     );
 
@@ -177,6 +180,10 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'SimpleSoftwareIO\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -211,9 +218,9 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
         ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/macroable',
+            0 => __DIR__ . '/..' . '/illuminate/collections',
             1 => __DIR__ . '/..' . '/illuminate/conditionable',
-            2 => __DIR__ . '/..' . '/illuminate/collections',
+            2 => __DIR__ . '/..' . '/illuminate/macroable',
             3 => __DIR__ . '/..' . '/illuminate/support',
         ),
         'Illuminate\\Pipeline\\' => 
@@ -256,6 +263,10 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
         ),
+        'DASPRiD\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
         'Carbon\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
@@ -267,6 +278,10 @@ class ComposerStaticInit417888e68c19a6ad344109363b9bfecf
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
     );
 

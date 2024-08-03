@@ -6,27 +6,35 @@
         <div class="w-[90%] sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden rounded-b-lg md:w-[30%]">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
+            @if (session('customErrors.sessionOut'))
+                <div class="text-red-500">{{ session('customErrors.sessionOut') }}</div>
+            @endif
 
             <form method="POST" action="sendTokenEmail">
                 @csrf
                 <!-- Email Address -->
                 <div>
                     <x-text-input id="email" class="block w-full mt-1 p-0 border-none focus:ring-0" type="text" name="email" :value="old('email')" placeholder="Email" autofocus autocomplete="username" />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <!-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> -->
                     <div class="w-full border-b border-gray-500"></div>
                 </div>
+                @if (session('customErrors.email'))
+                    <div class="text-red-500">{{ session('customErrors.email') }}</div>
+                @endif
 
                 <!-- Password -->
-                <!-- <div class="mt-4">
+                <div class="mt-4">
                     <x-text-input id="password" class="block mt-1 p-0 w-full border-none focus:ring-0"
                                     type="password"
                                     name="password"
                                     placeholder="Paassword"
                                     autocomplete="current-password" />
-
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    <!-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> -->
                     <div class="w-full border-b border-gray-500"></div>
-                </div> -->
+                </div>
+                @if (session('customErrors.pass'))
+                    <div class="text-red-500">{{ session('customErrors.pass') }}</div>
+                @endif
 
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="ml-3">

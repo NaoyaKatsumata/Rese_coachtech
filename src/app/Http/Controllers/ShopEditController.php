@@ -63,19 +63,25 @@ class ShopEditController extends Controller
         ->first();
         $categories = Category::all();
 
+        $nowOwner = Owner::join("users","users.id","=","owners.user_id")
+        ->where("owners.shop_id","=",$shopId)
+        ->orderBy('owners.created_at','desc')
+        ->first();
         $owners = User::where("authority","=","2")
         ->get();
 
         $reservationDate = date("Y/m/d");
         // $reservationDate->format('Y-m-d');
         // dd($reservationDate);
+
         $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
+        ->join("users","users.id","=","reservations.user_id")
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();
         // dd($reservationList,$shopId);
         // dd($request,$shop,$area,$category);
-        return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'selectedUserId'=>$userId,'errStatus'=>$errStatus]);
+        return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'selectedUserId'=>$userId,'errStatus'=>$errStatus,'nowOwner'=>$nowOwner]);
 
     }
 
@@ -121,6 +127,10 @@ class ShopEditController extends Controller
 
         $categories = Category::all();
 
+        $nowOwner = Owner::join("users","users.id","=","owners.user_id")
+        ->where("owners.shop_id","=",$shopId)
+        ->orderBy('owners.created_at','desc')
+        ->first();
 
         $owners = User::where("authority","=","2")
         ->get();
@@ -141,6 +151,7 @@ class ShopEditController extends Controller
         // $reservationDate->format('Y-m-d');
         // dd($reservationDate);
         $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
+        ->join("users","users.id","=","reservations.user_id")
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();
@@ -177,6 +188,18 @@ class ShopEditController extends Controller
             'img'=> 'img/'.$fileName,
             'area_id'=> $areaId,
         ]);
+
+        $alreadyOwner = Owner::join("shops","shops.id","=","owners.shop_id")
+        ->where("owners.user_id","=",$owner)
+        ->where("shops.shop_name","=",$shopName)
+        ->get();
+        if(!(is_null($alreadyOwner))){
+            $shopId = Shop::where("shop_name","=",$shopName)->first()->id;
+            Owner::create([
+                'user_id' => $owner,
+                'shop_id'=> $shopId,
+            ]);
+        }
         return view('storeComp');
     }
 
