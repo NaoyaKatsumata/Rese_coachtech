@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Reservation;
 use App\Models\Owner;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ShopController extends Controller
 {
@@ -112,6 +113,7 @@ class ShopController extends Controller
     public function detail(Request $request){
         $shopId = $request->shopId;
         $errStatus=false;
+        // dd($reservationDate,$users);
 
         $shop = Shop::where("id","=",$shopId)
         ->first();

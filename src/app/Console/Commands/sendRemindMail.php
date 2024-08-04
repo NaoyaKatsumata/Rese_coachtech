@@ -38,21 +38,22 @@ class sendRemindMail extends Command
 
     public function handle()
     {
-        $reservationDate = Carbon::now();
-        $reservationDate->format('Y-m-d');
+        $reservationDate = Carbon::now()->toDateString();
+        $nextDate = Carbon::now()->addDay()->toDateString();
 
         $users = Reservation::join("users","users.id","=","reservations.user_id")
         ->join("shops","shops.id","=","reservations.shop_id")
-        // ->where("reservations.reservation_date","<",$reservationDate)
-        // ->where("reservations.reservation_date",">",$reservationDate)
+        ->where("reservations.reservation_date","<=",$nextDate)
+        ->where("reservations.reservation_date",">=",$reservationDate)
         ->get();
 
         foreach($users as $user){
             $email = $user->email;
             $shopName = $user->shop_name;
-            // $reservationTime = $this->$user->reservation_time;
-            $reservationTime ="";
-            Mail::to($email)->send(new ReminderMail($shopName,$reservationTime));
+            $reservationTime = new Carbon($user->reservation_date);
+            $time = $reservationTime->format('h:i:s');
+            // $reservationTime = $reservationTime->format('Y-m-d H:i:s');
+            Mail::to($email)->send(new ReminderMail($shopName,$time));
         }
     }
 }

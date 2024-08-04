@@ -1,0 +1,40 @@
+# ベースイメージとしてPHPを使用
+FROM php:8.1-fpm
+
+# 必要なパッケージのインストール
+RUN apt-get update && apt-get install -y \
+    cron \
+    nginx \
+    zip \
+    unzip \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Composerをインストール
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# 作業ディレクトリを設定
+WORKDIR /var/www
+
+# 必要なファイルをコピー
+COPY . /var/www
+
+
+# crontabの設定ファイルを作成
+RUN echo "* * * * * php /var/www/artisan schedule:run > /proc/1/fd/1 2>&1" > /etc/cron.d/laravel-cron
+
+# crontabファイルの権限を正しく設定
+RUN chmod 0644 /etc/cron.d/laravel-cron
+
+# crontabを登録
+RUN crontab /etc/cron.d/laravel-cron
+
+# エントリーポイントスクリプトをコピー
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# エントリーポイントスクリプトを設定
+ENTRYPOINT ["/entrypoint.sh"]
+
+# デフォルトコマンドを設定
+CMD ["sh", "-c", "cron && php-fpm"]

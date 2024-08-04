@@ -1,0 +1,90 @@
+2024-08-04 04:22:06,823 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 04:22:06,826 INFO supervisord started with pid 1
+2024-08-04 04:22:07,830 INFO spawned: 'cron' with pid 7
+2024-08-04 04:22:07,831 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 04:22:08,861 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:22:08,861 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:38:47,681 WARN received SIGQUIT indicating exit request
+2024-08-04 04:38:47,682 INFO waiting for cron, php-fpm to die
+2024-08-04 04:38:47,686 INFO stopped: php-fpm (exit status 0)
+2024-08-04 04:38:47,687 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 04:38:59,211 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 04:38:59,222 INFO supervisord started with pid 1
+2024-08-04 04:39:00,227 INFO spawned: 'cron' with pid 7
+2024-08-04 04:39:00,229 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 04:39:01,321 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:39:01,322 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:43:19,323 WARN received SIGQUIT indicating exit request
+2024-08-04 04:43:19,324 INFO waiting for cron, php-fpm to die
+2024-08-04 04:43:19,331 INFO stopped: php-fpm (exit status 0)
+2024-08-04 04:43:19,331 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 04:43:30,885 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 04:43:30,893 INFO supervisord started with pid 1
+2024-08-04 04:43:31,897 INFO spawned: 'cron' with pid 7
+2024-08-04 04:43:31,901 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 04:43:32,929 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:43:32,930 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:46:15,549 WARN received SIGQUIT indicating exit request
+2024-08-04 04:46:15,551 INFO waiting for cron, php-fpm to die
+2024-08-04 04:46:15,557 INFO stopped: php-fpm (exit status 0)
+2024-08-04 04:46:15,558 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 04:47:50,665 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 04:47:50,671 INFO supervisord started with pid 1
+2024-08-04 04:47:51,676 INFO spawned: 'cron' with pid 7
+2024-08-04 04:47:51,678 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 04:47:52,714 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:47:52,717 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:52:32,782 WARN received SIGQUIT indicating exit request
+2024-08-04 04:52:32,784 INFO waiting for cron, php-fpm to die
+2024-08-04 04:52:32,789 INFO stopped: php-fpm (exit status 0)
+2024-08-04 04:52:32,791 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 04:52:44,259 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 04:52:44,266 INFO supervisord started with pid 1
+2024-08-04 04:52:45,272 INFO spawned: 'cron' with pid 7
+2024-08-04 04:52:45,274 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 04:52:46,302 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:52:46,303 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 04:58:09,444 WARN received SIGQUIT indicating exit request
+2024-08-04 04:58:09,446 INFO waiting for cron, php-fpm to die
+2024-08-04 04:58:09,450 INFO stopped: php-fpm (exit status 0)
+2024-08-04 04:58:09,450 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 13:58:21,020 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 13:58:21,039 INFO supervisord started with pid 1
+2024-08-04 13:58:22,043 INFO spawned: 'cron' with pid 6
+2024-08-04 13:58:22,045 INFO spawned: 'php-fpm' with pid 7
+2024-08-04 13:58:23,078 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 13:58:23,079 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 14:26:32,632 WARN received SIGQUIT indicating exit request
+2024-08-04 14:26:32,634 INFO waiting for cron, php-fpm to die
+2024-08-04 14:26:32,640 INFO stopped: php-fpm (exit status 0)
+2024-08-04 14:26:32,641 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 14:26:43,683 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 14:26:43,688 INFO supervisord started with pid 1
+2024-08-04 14:26:44,694 INFO spawned: 'cron' with pid 6
+2024-08-04 14:26:44,696 INFO spawned: 'php-fpm' with pid 7
+2024-08-04 14:26:45,725 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 14:26:45,726 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 14:29:06,076 WARN received SIGQUIT indicating exit request
+2024-08-04 14:29:06,079 INFO waiting for cron, php-fpm to die
+2024-08-04 14:29:06,092 INFO stopped: php-fpm (exit status 0)
+2024-08-04 14:29:06,094 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 14:30:23,314 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 14:30:23,318 INFO supervisord started with pid 1
+2024-08-04 14:30:24,323 INFO spawned: 'cron' with pid 7
+2024-08-04 14:30:24,327 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 14:30:25,378 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 14:30:25,378 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 15:00:28,207 WARN received SIGQUIT indicating exit request
+2024-08-04 15:00:28,211 INFO waiting for cron, php-fpm to die
+2024-08-04 15:00:28,225 INFO stopped: php-fpm (exit status 0)
+2024-08-04 15:00:28,227 WARN stopped: cron (terminated by SIGTERM)
+2024-08-04 15:03:55,202 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-04 15:03:55,213 INFO supervisord started with pid 1
+2024-08-04 15:03:56,216 INFO spawned: 'cron' with pid 7
+2024-08-04 15:03:56,220 INFO spawned: 'php-fpm' with pid 8
+2024-08-04 15:03:57,258 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 15:03:57,259 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-04 15:06:24,818 WARN received SIGQUIT indicating exit request
+2024-08-04 15:06:24,819 INFO waiting for cron, php-fpm to die
+2024-08-04 15:06:24,823 INFO stopped: php-fpm (exit status 0)
+2024-08-04 15:06:24,823 WARN stopped: cron (terminated by SIGTERM)
