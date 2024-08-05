@@ -27,7 +27,7 @@ services:
       mysqld --default-authentication-plugin=mysql_native_password
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
-      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/mysql.cnf
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
