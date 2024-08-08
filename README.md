@@ -69,41 +69,41 @@
     </li>
     <li>
         composerのインストール<br>
-        docker-compose exec php bash
+        docker-compose exec php bash<br>
         composer install
     </li>
     <li>
         .envファイルの作成<br>
         cp .env.example .env<br>
         .envファイルの書き換え<br>
-        DB_CONNECTION=mysql
-        DB_HOST=mysql
-        DB_PORT=3306
-        DB_DATABASE=任意のDB名
-        DB_USERNAME=任意のユーザ名
-        DB_PASSWORD=任意のパスワード
+        DB_CONNECTION=mysql<br>
+        DB_HOST=mysql<br>
+        DB_PORT=3306<br>
+        DB_DATABASE=laravel_db<br>
+        DB_USERNAME=laravel_user<br>
+        DB_PASSWORD=laravel_pass<br>
     </li>
     <li>
         dockerスタート
     </li>
     <li>
-        phpコンテナにログイン
+        phpコンテナにログイン<br>
         docker-compose exec php bash
     </li>
     <li>
-        ダミーデータの投入
+        ダミーデータの投入<br>
         php artisan db:seed
     </li>
     <li>
-        phpMyAdmin(localhost:8080)へアクセスし、管理者のメールアドレスを任意のものに変更
+        phpMyAdmin(localhost:8080)へアクセスし、管理者のメールアドレスを任意のものに変更<br>
         usersテーブル -> id 1 administratorの"email"を個人のメールアドレスに変更
     </li>
     <li>
-        adminアカウントで一般ユーザとオーナーアカウントを作成
-        もしくは、usersテーブル -> id 2 ownerの"email"を個人のメールアドレスに変更
-                                id 3 userの"email"を個人のメールアドレスに変更
-        (管理者はユーザの作成時に権限を付与、店舗の追加・編集、予約者へのお知らせメールの送信が可能
-         オーナーは自分の店舗の編集のみ可能、予約者へのお知らせメールの送信が可能
+        adminアカウントで一般ユーザとオーナーアカウントを作成<br>
+        もしくは、usersテーブル -> id 2 ownerの"email"を個人のメールアドレスに変更<br>
+                                id 3 userの"email"を個人のメールアドレスに変更<br>
+        (管理者はユーザの作成時に権限を付与、店舗の追加・編集、予約者へのお知らせメールの送信が可能<br>
+         オーナーは自分の店舗の編集のみ可能、予約者へのお知らせメールの送信が可能<br>
          一般ユーザは店舗の予約、予約の変更・削除、店舗の評価が可能)
     </li>
 </ol>
