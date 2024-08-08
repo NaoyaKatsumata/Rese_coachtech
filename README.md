@@ -101,7 +101,7 @@
     <li>
         adminアカウントで一般ユーザとオーナーアカウントを作成<br>
         もしくは、usersテーブル -> id 2 ownerの"email"を個人のメールアドレスに変更<br>
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;id 3 userの"email"を個人のメールアドレスに変更<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;id 3 userの"email"を個人のメールアドレスに変更<br>
         (・管理者はユーザの作成時に権限を付与、店舗の追加・編集、予約者へのお知らせメールの送信が可能<br>
         &nbsp;・オーナーは自分の店舗の編集のみ可能、予約者へのお知らせメールの送信が可能<br>
         &nbsp;・一般ユーザは店舗の予約、予約の変更・削除、店舗の評価が可能)
