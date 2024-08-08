@@ -75,8 +75,8 @@
     
 
 
-    <!-- ログイン時メニュー -->
-    <div class="absolute w-[90%] mx-auto my-6 top-[0px]">
+   <!-- ログイン時メニュー -->
+   <div class="absolute w-[90%] mx-auto my-6 top-[0px]">
         <div id="menuBg" class="w-full h-full fixed top-[0px] left-[0px] bottom-[0px] bg-white"></div>
         <div id="close" class="w-[40px] h-[40px] pl-16 py-6 bg-blue-600 rounded-[5px] fixed shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]">
             <div class="w-[70%] mx-auto fixed">
@@ -90,7 +90,11 @@
                 <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="userId" value="{{$userId}}">
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @else
+                                <input type="hidden" name="userId" value="null">
+                                @endauth
                                 <input type="hidden" name="shopId" value="">
                                 <input type="hidden" name="area" value="All shop">
                                 <input type="hidden" name="category" value="">

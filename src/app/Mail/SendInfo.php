@@ -19,7 +19,6 @@ class SendInfo extends Mailable
      * Create a new message instance.
      */
     public function __construct($text) {
-        // $this->email = $email;
         $this->text = $text;
     }
 
@@ -27,7 +26,6 @@ class SendInfo extends Mailable
      **メール作成
      */
     public function build() {
-        // return $this->to($this->email)
         return $this->subject("お知らせ")
             ->view('auth.info-mail')
             ->with([

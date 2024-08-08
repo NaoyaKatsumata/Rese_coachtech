@@ -17,9 +17,6 @@ use Carbon\Carbon;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
     public function create(): View
     {
         return view('auth.login');
@@ -29,14 +26,8 @@ class AuthenticatedSessionController extends Controller
         return view('auth.onetime');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function auth(Request $request)
     {
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
         $email = session('email');
         $user = User::where('email', $email)->first();
         $expiration = new Carbon($user->onetime_expiration);
@@ -51,7 +42,6 @@ class AuthenticatedSessionController extends Controller
             $areas = Area::all();
             $categories = Category::all();
             $request->session()->regenerateToken();
-            // dd($userFavorites);
             return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
         }
         $errorMessage = [
@@ -60,12 +50,8 @@ class AuthenticatedSessionController extends Controller
         return redirect('/login')
                          ->with('customErrors', $errorMessage)
                          ->withInput($request->all());
-        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

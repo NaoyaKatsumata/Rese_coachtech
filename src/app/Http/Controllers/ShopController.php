@@ -19,7 +19,6 @@ class ShopController extends Controller
         Auth::guard('web')->logout();
         $shops = Shop::all();
         $areas = Area::all();
-        // dd($shops);
         $categories = Category::all();
         return view('allshop',['shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>'','selectedCategory'=>'']);
     }
@@ -33,7 +32,6 @@ class ShopController extends Controller
         $owners = Owner::where("user_id","=",$userId)
         ->get();
         $request->session()->regenerateToken();
-        // dd($userId,$shopId);
         if($request->area === 'All shop'){
             $areaId = Area::all();
         }else{
@@ -86,7 +84,6 @@ class ShopController extends Controller
         $selectedCategoryId = Category::where("category_name","=",$selectedCategory)
         ->first();
         $selectedShop = $request->shopName;
-        // dd($selectedShop);
         if(isset($selectedAreaId)){
             $shops = Shop::where("area_id","=",$selectedAreaId->id)
             ->get();
@@ -106,14 +103,12 @@ class ShopController extends Controller
         $categories = Category::all();
         $userFavorites = Favorite::where('user_id','=',$userId)
         ->get();
-        // dd($userId,$selectedArea,$selectedCategory,$selectedShop,$shops);
         return view('allshop',['shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'userFavorites'=>$userFavorites,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'selectedShop'=>$selectedShop]);
     }
 
     public function detail(Request $request){
         $shopId = $request->shopId;
         $errStatus=false;
-        // dd($reservationDate,$users);
 
         $shop = Shop::where("id","=",$shopId)
         ->first();
@@ -135,14 +130,12 @@ class ShopController extends Controller
         ->get();
 
         $reservationDate = date("Y/m/d");
-        // $reservationDate->format('Y-m-d');
-        // dd($reservationDate);
         $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
         ->join("users","users.id","=","reservations.user_id")
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();
-        // dd($nowOwner);
+
         return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'errStatus'=>$errStatus,'nowOwner'=>$nowOwner]);
     }
 }

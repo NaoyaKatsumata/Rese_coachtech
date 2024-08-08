@@ -21,25 +21,18 @@ use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
+
     public function create(): View
     {
-        // return view('auth.register');
         return view('auth.register');
     }
 
     public function createAdmin(Request $request)
     {
-        // dd($request);
         $userId = $request->userId;
         return view('auth.register-admin',['userId'=>$userId]);
     }
 
-    /**
-     **引数で渡されたメールアドレスとワンタイムトークンをusersテーブルに追加するコントロール
-     */
     public static function storeEmailAndToken($email, $onetime_token, $onetime_expiration) {
         User::create([
             'email' => $email,
@@ -48,9 +41,6 @@ class RegisteredUserController extends Controller
         ]);
     }
 
-    /**
-     **引数で渡されたワンタイムトークンをusersテーブルに追加するコントロール
-     */
     public static function storeToken($email, $onetime_token, $onetime_expiration) {
         User::where('email', $email)->update([
             'onetime_token' => $onetime_token,
@@ -58,9 +48,6 @@ class RegisteredUserController extends Controller
         ]);
     }
 
-    /**
-     **ワンタイムトークンが含まれるメールを送信する
-     */
     public function sendTokenEmail(Request $request) {
         $email = $request->email;
         $password = $request->password;
@@ -93,7 +80,6 @@ class RegisteredUserController extends Controller
 
         $user = User::where('email', $email)->first(); // 受け取ったメールアドレスで検索
         if ($user === null) {
-            // RegisteredUserController::storeEmailAndToken($email, $onetime_token, $onetime_expiration);
             return view('auth.register');
         } else {
             RegisteredUserController::storeToken($email, $onetime_token, $onetime_expiration);
@@ -105,11 +91,6 @@ class RegisteredUserController extends Controller
         return view("auth.onetime");
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -126,11 +107,6 @@ class RegisteredUserController extends Controller
 
         $userId = User::where('email','=',$request->email)
         ->first();
-
-        // event(new Registered($user));
-
-        // Auth::login($user);
-
         return view('thanks',['userId'=>$userId]);
     }
 
@@ -169,7 +145,6 @@ class RegisteredUserController extends Controller
         $areas = Area::all();
         //全カテゴリー取得
         $categories = Category::all();
-        // dd($userFavorites,$shops,$areas,$categories);
 
         return view('allshop',['userFavorites'=>$userFavorites,'shops'=>$shops,'areas'=>$areas,'categories'=>$categories,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory]);
     }

@@ -15,7 +15,6 @@
                 <!-- Email Address -->
                 <div>
                     <x-text-input id="email" class="block w-full mt-1 p-0 border-none focus:ring-0" type="text" name="email" :value="old('email')" placeholder="Email" autofocus autocomplete="username" />
-                    <!-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> -->
                     <div class="w-full border-b border-gray-500"></div>
                 </div>
                 @if (session('customErrors.email'))
@@ -29,7 +28,6 @@
                                     name="password"
                                     placeholder="Paassword"
                                     autocomplete="current-password" />
-                    <!-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> -->
                     <div class="w-full border-b border-gray-500"></div>
                 </div>
                 @if (session('customErrors.pass'))

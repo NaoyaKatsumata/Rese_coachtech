@@ -11,7 +11,6 @@ use App\Models\Shop;
 class ReviewController extends Controller
 {
     public function store(Request $request){
-        // dd($request);
         $userId=$request->userId;
         $shopId=$request->shopId;
         $review=$request->review;
@@ -23,7 +22,6 @@ class ReviewController extends Controller
         $reviewed = Review::where("user_id","=",$userId)
         ->where("shop_id","=",$shopId)
         ->first();
-        // dd($reviewed);
 
         if(is_null($reviewed)){
             Review::create([
@@ -55,7 +53,6 @@ class ReviewController extends Controller
         ->where("user_id","=",$userId)
         ->get();
 
-        // dd($userName,$reservations,$favorites);
         return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites,'shops'=>$shops]);
     }
 }

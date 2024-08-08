@@ -91,7 +91,9 @@
                                 @csrf
                                 @method('PUT')
                                 @auth
-                                <input type="hidden" name="userId" value="{{$userId}}">
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @else
+                                <input type="hidden" name="userId" value="null">
                                 @endauth
                                 <input type="hidden" name="shopId" value="">
                                 <input type="hidden" name="area" value="All shop">
@@ -125,7 +127,7 @@
                                 @endauth
                                 <input type="submit" value="Registration">
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/ownersetting">OwnerSetting</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/addShop">Add shop</a></li>
                 @endauth
                 @endif
             </ul>

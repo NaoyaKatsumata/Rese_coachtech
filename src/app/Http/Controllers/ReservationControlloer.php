@@ -10,7 +10,6 @@ use Carbon\Carbon;
 class ReservationControlloer extends Controller
 {
     public function done(ReservationRequest $request){
-        // dd($request);
         $userId = $request->userId;
         $shopId = $request->shopId;
         $strnum = $request->num;
@@ -36,7 +35,6 @@ class ReservationControlloer extends Controller
             'reservation_date'=>$reservation_date,
             'qr_code'=>$random_words
         ]);
-        // dd($request);
         $request->session()->regenerateToken();
         return view('done',['userId'=>$userId]);
     }

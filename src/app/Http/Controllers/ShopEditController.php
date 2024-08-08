@@ -34,7 +34,6 @@ class ShopEditController extends Controller
         $userId=$request->userId;
         $shopId=$request->shopId;
         $errStatus=0;
-        // dd($userId,$shopId);
 
         if($userId==0){
             $errStatus=1;
@@ -71,16 +70,13 @@ class ShopEditController extends Controller
         ->get();
 
         $reservationDate = date("Y/m/d");
-        // $reservationDate->format('Y-m-d');
-        // dd($reservationDate);
 
         $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
         ->join("users","users.id","=","reservations.user_id")
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();
-        // dd($reservationList,$shopId);
-        // dd($request,$shop,$area,$category);
+
         return view('detail',['shop'=>$shop,'selectedArea'=>$selectedArea,'selectedCategory'=>$selectedCategory,'owners'=>$owners,'areas'=>$areas,'categories'=>$categories,'reservationList'=>$reservationList,'selectedUserId'=>$userId,'errStatus'=>$errStatus,'nowOwner'=>$nowOwner]);
 
     }
@@ -148,16 +144,12 @@ class ShopEditController extends Controller
         ->first();
 
         $reservationDate = date("Y/m/d");
-        // $reservationDate->format('Y-m-d');
-        // dd($reservationDate);
         $reservationList = Reservation::join("shops","shops.id","=","reservations.shop_id")
         ->join("users","users.id","=","reservations.user_id")
         ->where("shop_id","=",$shopId)
         ->where("reservation_date",">=",$reservationDate)
         ->get();
-        // dd($selectedArea,$selectedCategory);
-        // dd($reservationList,$shopId);
-        // dd($request,$shop,$area,$category);
+
         return view('editComp',['userId'=>$userId]);
     }
 
@@ -166,7 +158,7 @@ class ShopEditController extends Controller
         $categories = Category::all();
         $owners = User::where("authority","=","2")
         ->get();
-        // dd($areas);
+
         return view('addShop',["areas"=>$areas,"categories"=>$categories,"owners"=>$owners]);
     }
 
@@ -180,7 +172,6 @@ class ShopEditController extends Controller
         $file->storeAs('public/img',$fileName);
         $detail = $request->detail;
 
-        // dd($request,$shopName,$category,$area,$owner,$fileName,$detail);
         Shop::create([
             'shop_name' => $shopName ,
             'detail'=> $detail,

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Shop;
 use App\Models\Area;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Carbon\Carbon;
 
 class MypageController extends Controller
 {
@@ -26,9 +27,7 @@ class MypageController extends Controller
         ->join("categories","categories.id","=","shops.category_id")
         ->where("user_id","=",$userId)
         ->get();
-        // $qrCode = QrCode::size(200)->generate('https://example.com');
 
-        // dd($userName,$reservations,$favorites);
         return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'shops'=>$shops,"userId"=>$userId]);
     }
 
@@ -58,7 +57,6 @@ class MypageController extends Controller
         ->where("user_id","=",$userId)
         ->get();
 
-        // dd($userName,$reservations,$favorites);
         return view('mypage',['userName'=>$userName,'reservations'=>$reservations,'favorites'=>$favorites,'shops'=>$shops]);
     }
 
@@ -68,8 +66,9 @@ class MypageController extends Controller
         $number = $request->number;
         $date = $request->date;
         $time = $request->time;
+        $reservation_date = new Carbon($date.' '.$time);
 
-        $shop = Shop::select("reservations.reservation_number","reservations.reservation_date","reservations.reservation_time",
+        $shop = Shop::select("reservations.reservation_number","reservations.reservation_date",
         "reservations.user_id","shops.shop_name","shops.img","shops.detail","shops.id","areas.area_name","categories.category_name")
         ->join("reservations","reservations.shop_id","=","shops.id")
         ->join("areas","shops.area_id","=","areas.id")
@@ -77,8 +76,7 @@ class MypageController extends Controller
         ->where("user_id","=",$userId)
         ->where("shop_id","=",$shopId)
         ->where("reservation_number","=",$number)
-        ->where("reservation_date","=",$date)
-        ->where("reservation_time","=",$time)
+        ->where("reservation_date","=",$reservation_date)
         ->first();
 
         return view('edit',['shop'=>$shop]);
@@ -94,17 +92,17 @@ class MypageController extends Controller
         $num = preg_replace("/[^0-9]/", "", $strnum);
         $date = $request->date;
         $time = $request->time;
+        $prevReservationDate = new Carbon($prevDate.' '.$prevTime);
+        $reservationDate = new Carbon($date.' '.$time);
 
         $updateData = Reservation::where("user_id","=",$userId)
         ->where("shop_id","=",$shopId)
         ->where("reservation_number","=",$prevNum)
-        ->where("reservation_date","=",$prevDate)
-        ->where("reservation_time","=",$prevTime)
+        ->where("reservation_date","=",$prevReservationDate)
         ->first();
 
         $updateData->update(['reservation_number'=>$num,
-                             'reservation_date'=>$date,
-                             'reservation_time'=>$time]);
+                             'reservation_date'=>$reservationDate]);
         
         return view('done',['userId'=>$userId]);
     }

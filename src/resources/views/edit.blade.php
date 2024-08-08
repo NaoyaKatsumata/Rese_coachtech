@@ -68,12 +68,17 @@
                 <form class="flex flex-col w-full mx-auto h-full" action="/done" method="post">
                 @method("PUT")
                 @csrf
+                @php
+                    $timestamp = explode(" ", $shop->reservation_date);
+                    $date = $timestamp[0];
+                    $time = $timestamp[1];
+                @endphp
                     <input type="hidden" name="shopId" value="{{$shop->id}}">
                     <input type="hidden" name="userId" value="{{$userId}}">
                     <input type="hidden" name="prevDate" value="{{$shop->reservation_date}}">
                     <input type="hidden" name="prevTime" value="{{$shop->reservation_time}}">
                     <input type="hidden" name="prevNum" value="{{$shop->reservation_number}}">
-                    <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px]" name="date" id="date" value="{{$shop->reservation_date}}">
+                    <input type="date" class="mx-[5%] w-[40%] my-2 rounded-[5px]" name="date" id="date" value="{{$date}}">
                     <select class="mx-[5%] my-2 rounded-[5px]" name="time" id="time">
                         <option @if($shop->reservation_time == "11:00:00") selected @endif>11:00</option>
                         <option @if($shop->reservation_time == "12:00:00") selected @endif>12:00</option>
@@ -108,11 +113,11 @@
                             </tr>
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Date</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedDate">{{$shop->reservation_date}}</td>
+                                <td class="w-[70%] py-2 text-left text-white" id="date">{{$date}}</td>
                             </tr>
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Time</td>
-                                <td class="w-[70%] py-2 text-left text-white" id="selectedTime">{{$shop->reservation_time}}</td>
+                                <td class="w-[70%] py-2 text-left text-white" id="time">{{$time}}</td>
                             </tr>
                             <tr>
                                 <td class="w-[30%] py-2 text-left text-white">Number</td>
@@ -164,7 +169,11 @@
                 <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="userId" value="{{$userId}}">
+                                @auth
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                @else
+                                <input type="hidden" name="userId" value="null">
+                                @endauth
                                 <input type="hidden" name="shopId" value="">
                                 <input type="hidden" name="area" value="All shop">
                                 <input type="hidden" name="category" value="">
@@ -197,7 +206,7 @@
                                 @endauth
                                 <input type="submit" value="Registration">
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/ownersetting">OwnerSetting</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/addShop">Add shop</a></li>
                 @endauth
                 @endif
             </ul>
