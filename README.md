@@ -58,20 +58,20 @@
 <img src="Rese_ER.png">
 <h1>環境構築</h1>
 <ol>
-    <li>任意のフォルダに移動</li>
+    <li>任意のフォルダに移動</li><br>
     <li>
         フォルダをローカルにclone<br>
         git@github.com:NaoyaKatsumata/Rese_coachtech.git
-    </li>
+    </li><br>
     <li>
         docker-composeをビルド<br>
         docker-compose up -d --build
-    </li>
+    </li><br>
     <li>
         composerのインストール<br>
         docker-compose exec php bash<br>
         composer install
-    </li>
+    </li><br>
     <li>
         .envファイルの作成<br>
         cp .env.example .env<br>
@@ -92,11 +92,11 @@
         MAIL_FROM_ADDRESS=naoyakatsumata0708@gmail.com<br>
         MAIL_ENCRYPTION=null<br>
         MAIL_FROM_NAME="rase"
-    </li>
+    </li><br>
     <li>
         key作成<br>
         php artisan key:generate
-    </li>
+    </li><br>
     <li>
         npmのインストール<br>
         コンテナから出る<br>
@@ -105,7 +105,7 @@
         cd src<br>
         npmをインストール<br>
         npm install
-    </li>
+    </li><br>
     <li>
         ダミーデータの投入<br>
         docker-compose exec php bash<br>
@@ -116,24 +116,24 @@
         php artisan migrate:rollback<br>
         php artisan migrate<br>
         php artisan db:seed
-    </li>
+    </li><br>
     <li>
         ストレージとリンク<br>
         php artisan storage:link
-    </li>
+    </li><br>
     <li>
         npm起動<br>
         exit<br>
         cd src<br>
         npm run dev
-    </li>
+    </li><br>
     <li>
         'storage/img'の写真を'storage/qpp/public'の中に移動
-    </li>
+    </li><br>
     <li>
         phpMyAdmin(localhost:8080)へアクセスし、管理者のメールアドレスを任意のものに変更<br>
         usersテーブル -> id 1 administratorの"email"を個人のメールアドレスに変更
-    </li>
+    </li><br>
     <li>
         adminアカウントで一般ユーザとオーナーアカウントを作成<br>
         もしくは、usersテーブル -> id 2 ownerの"email"を個人のメールアドレスに変更<br>
