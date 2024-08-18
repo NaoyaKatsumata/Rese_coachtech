@@ -65,18 +65,18 @@
     </li><br>
     <li>
         docker-composeをビルド<br>
-        docker-compose up -d --build
+        　docker-compose up -d --build
     </li><br>
     <li>
         composerのインストール<br>
-        docker-compose exec php bash<br>
-        composer install
+        　docker-compose exec php bash<br>
+        　composer install
     </li><br>
     <li>
         .envファイルの作成<br>
-        cp .env.example .env<br>
+        　cp .env.example .env<br>
         .envファイルの書き換え<br>
-        DB_CONNECTION=mysql<br>
+        　DB_CONNECTION=mysql<br>
         DB_HOST=mysql<br>
         DB_PORT=3306<br>
         DB_DATABASE=laravel_db<br>
