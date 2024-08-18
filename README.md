@@ -77,55 +77,55 @@
         　cp .env.example .env<br>
         .envファイルの書き換え<br>
         　DB_CONNECTION=mysql<br>
-        DB_HOST=mysql<br>
-        DB_PORT=3306<br>
-        DB_DATABASE=laravel_db<br>
-        DB_USERNAME=laravel_user<br>
-        DB_PASSWORD=laravel_pass<br>
+        　DB_HOST=mysql<br>
+        　DB_PORT=3306<br>
+        　DB_DATABASE=laravel_db<br>
+        　DB_USERNAME=laravel_user<br>
+        　DB_PASSWORD=laravel_pass<br>
         <br>
-        MAIL_MAILER=smtp<br>
-        MAIL_HOST=smtp.gmail.com<br>
-        MAIL_PORT=587<br>
-        MAIL_USERNAME=naoyakatsumata0708@gmail.com<br>
-        MAIL_PASSWORD="sjkm dwkn ihjx fxvy"<br>
-        MAIL_ENCRYPTION=tls<br>
-        MAIL_FROM_ADDRESS=naoyakatsumata0708@gmail.com<br>
-        MAIL_ENCRYPTION=null<br>
-        MAIL_FROM_NAME="rase"
+        　MAIL_MAILER=smtp<br>
+        　MAIL_HOST=smtp.gmail.com<br>
+        　MAIL_PORT=587<br>
+        　MAIL_USERNAME=naoyakatsumata0708@gmail.com<br>
+        　MAIL_PASSWORD="sjkm dwkn ihjx fxvy"<br>
+        　MAIL_ENCRYPTION=tls<br>
+        　MAIL_FROM_ADDRESS=naoyakatsumata0708@gmail.com<br>
+        　MAIL_ENCRYPTION=null<br>
+        　MAIL_FROM_NAME="rase"
     </li><br>
     <li>
         key作成<br>
-        php artisan key:generate
+        　php artisan key:generate
     </li><br>
     <li>
         npmのインストール<br>
         コンテナから出る<br>
-        exit<br>
+        　exit<br>
         srcに移動<br>
-        cd src<br>
+        　cd src<br>
         npmをインストール<br>
-        npm install
+        　npm install
     </li><br>
     <li>
         ダミーデータの投入<br>
-        docker-compose exec php bash<br>
-        php artisan migrate<br>
-        php artisan db:seed<br>
+        　docker-compose exec php bash<br>
+        　php artisan migrate<br>
+        　php artisan db:seed<br>
         <br>
         ※エラーが出たらロールバックしもう一度コマンドを入力<br>
-        php artisan migrate:rollback<br>
-        php artisan migrate<br>
-        php artisan db:seed
+        　php artisan migrate:rollback<br>
+        　php artisan migrate<br>
+        　php artisan db:seed
     </li><br>
     <li>
         ストレージとリンク<br>
-        php artisan storage:link
+        　php artisan storage:link
     </li><br>
     <li>
         npm起動<br>
-        exit<br>
-        cd src<br>
-        npm run dev
+        　exit<br>
+        　cd src<br>
+        　npm run dev
     </li><br>
     <li>
         'storage/img'の写真を'storage/qpp/public'の中に移動
