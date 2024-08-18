@@ -82,17 +82,52 @@
         DB_DATABASE=laravel_db<br>
         DB_USERNAME=laravel_user<br>
         DB_PASSWORD=laravel_pass<br>
+        <br>
+        MAIL_MAILER=smtp<br>
+        MAIL_HOST=smtp.gmail.com<br>
+        MAIL_PORT=587<br>
+        MAIL_USERNAME=naoyakatsumata0708@gmail.com<br>
+        MAIL_PASSWORD="sjkm dwkn ihjx fxvy"<br>
+        MAIL_ENCRYPTION=tls<br>
+        MAIL_FROM_ADDRESS=naoyakatsumata0708@gmail.com<br>
+        MAIL_ENCRYPTION=null<br>
+        MAIL_FROM_NAME="rase"
     </li>
     <li>
-        dockerスタート
+        key作成<br>
+        php artisan key:generate
     </li>
     <li>
-        phpコンテナにログイン<br>
-        docker-compose exec php bash
+        npmのインストール<br>
+        コンテナから出る<br>
+        exit<br>
+        srcに移動<br>
+        cd src<br>
+        npmをインストール<br>
+        npm install
     </li>
     <li>
         ダミーデータの投入<br>
+        docker-compose exec php bash<br>
+        php artisan migrate<br>
+        php artisan db:seed<br>
+        エラーが出たらロールバックしもう一度コマンドを入力<br>
+        php artisan migrate:rollback<br>
+        php artisan migrate<br>
         php artisan db:seed
+    </li>
+    <li>
+        ストレージとリンク<br>
+        php artisan storage:link
+    </li>
+    <li>
+        npm起動<br>
+        exit<br>
+        cd src<br>
+        npm run dev
+    </li>
+    <li>
+        'storage/img'の写真を'storage/qpp/public'の中に移動
     </li>
     <li>
         phpMyAdmin(localhost:8080)へアクセスし、管理者のメールアドレスを任意のものに変更<br>
