@@ -120,3 +120,7 @@
 2024-08-08 23:14:20,743 INFO spawned: 'php-fpm' with pid 8
 2024-08-08 23:14:21,827 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2024-08-08 23:14:21,827 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-09 03:30:21,893 WARN received SIGQUIT indicating exit request
+2024-08-09 03:30:21,894 INFO waiting for cron, php-fpm to die
+2024-08-09 03:30:21,900 INFO stopped: php-fpm (exit status 0)
+2024-08-09 03:30:21,901 WARN stopped: cron (terminated by SIGTERM)
