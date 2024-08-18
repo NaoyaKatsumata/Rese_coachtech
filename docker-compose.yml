@@ -43,7 +43,7 @@ services:
   
   mail:
     image: axllent/mailpit:v1.8
-    container_name: mailpit
+    container_name: mailpit_test
     ports:
       - 8025:8025
       - 1025:1025
