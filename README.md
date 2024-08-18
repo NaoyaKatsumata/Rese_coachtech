@@ -75,7 +75,8 @@
     <li>
         .envファイルの作成<br>
         　cp .env.example .env<br>
-        .envファイルの書き換え<br>
+        <br>
+        書き換え<br>
         　DB_CONNECTION=mysql<br>
         　DB_HOST=mysql<br>
         　DB_PORT=3306<br>
