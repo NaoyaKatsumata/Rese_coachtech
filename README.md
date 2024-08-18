@@ -111,7 +111,8 @@
         docker-compose exec php bash<br>
         php artisan migrate<br>
         php artisan db:seed<br>
-        <span style="color:#ff0000;">エラーが出たら</span>ロールバックしもう一度コマンドを入力<br>
+        <br>
+        ※エラーが出たらロールバックしもう一度コマンドを入力<br>
         php artisan migrate:rollback<br>
         php artisan migrate<br>
         php artisan db:seed
